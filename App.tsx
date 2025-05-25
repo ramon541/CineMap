@@ -1,15 +1,24 @@
+import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Colors } from './src/styles';
-// import { SafeAreaView } from 'react-native-safe-area-context';
+import Providers from './src/Providers';
+import { Toast } from './src/components';
 
 export default function App() {
     return (
-        <View
-            style={[styles.container, { backgroundColor: Colors.background }]}>
-            <Text>Open up App.tsx to start working on your app!</Text>
-            <StatusBar style="light" />
-        </View>
+        <Providers>
+            <SafeAreaView
+                style={[
+                    styles.container,
+                    { backgroundColor: Colors.background },
+                ]}>
+                <Text>Open up App.tsx to start working on your app!</Text>
+                <StatusBar style="light" />
+            </SafeAreaView>
+            <Toast />
+        </Providers>
     );
 }
 
