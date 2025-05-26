@@ -1,10 +1,12 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Colors } from './src/styles';
 import Providers from './src/Providers';
 import { Toast } from './src/components';
+import './src/libs/mmkv-config';
+import Home from './src/screens/Home';
 
 export default function App() {
     return (
@@ -14,7 +16,7 @@ export default function App() {
                     styles.container,
                     { backgroundColor: Colors.background },
                 ]}>
-                <Text>Open up App.tsx to start working on your app!</Text>
+                <Home />
                 <StatusBar style="light" />
             </SafeAreaView>
             <Toast />

@@ -10,16 +10,11 @@ export function useShowSnackbar() {
 
     return useCallback(
         ({
-            duration,
+            duration = 3000,
             text,
             textColor = Colors.white,
             backgroundColor = Colors.shape,
-        }: {
-            duration: number;
-            text: string;
-            textColor: string;
-            backgroundColor?: string;
-        }) => {
+        }: IUseShowSnackbarProps) => {
             setSnackbarInfo({
                 visible: true,
                 text: text,
