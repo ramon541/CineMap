@@ -1,9 +1,9 @@
-interface IHttp<D> {
-    get<T>(url: string, config?: D): Promise<T>;
-    post<T, D = any>(url: string, data?: D, config?: D): Promise<T>;
-    put<T, D = any>(url: string, data?: D, config?: D): Promise<T>;
-    delete<T>(url: string, config?: D): Promise<T>;
-    patch<T, D = any>(url: string, data?: D, config?: D): Promise<T>;
+interface IHttp<K> {
+    get<T>(url: string, config?: K): Promise<T>;
+    post<T, D = any>(url: string, data?: D, config?: K): Promise<T>;
+    put<T, D = any>(url: string, data?: D, config?: K): Promise<T>;
+    delete<T>(url: string, config?: K): Promise<T>;
+    patch<T, D = any>(url: string, data?: D, config?: K): Promise<T>;
 }
 
 interface IHttpMethods {
