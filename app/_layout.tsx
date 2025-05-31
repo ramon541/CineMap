@@ -1,12 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Colors } from './src/styles';
-import Providers from './src/Providers';
-import { Toast } from './src/components';
-import './src/libs/mmkv-config';
-import Home from './src/screens/Home';
+import { Colors } from '../styles';
+import Providers from '../Providers';
+import { Toast } from '../components';
+import '../libs/mmkv-config';
+import Home from './home';
 
 export default function App() {
     return (
@@ -18,6 +18,7 @@ export default function App() {
                 ]}>
                 <Home />
                 <StatusBar style="light" />
+                <Text style={{ color: 'white' }}>Hello World!</Text>
             </SafeAreaView>
             <Toast />
         </Providers>

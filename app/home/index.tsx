@@ -6,10 +6,10 @@ export default function Home() {
     const showSnackbar = useShowSnackbar();
     return (
         <View>
-            <Text>Hello World!</Text>
+            <Text style={{ color: 'white' }}>Hello World!</Text>
             <Button
                 title="Teste"
-                onPress={() => showSnackbar({ text: 'Fudeu de vez' })}
+                onPress={() => showSnackbar({ text: 'Aopaaa!' })}
             />
         </View>
     );

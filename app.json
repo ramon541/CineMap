@@ -1,35 +1,38 @@
 {
-  "expo": {
-    "name": "CineMap",
-    "slug": "CineMap",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true,
-      "package": "com.ramon541.CineMap"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "6ef2606a-362d-4264-8719-410fff752e41"
-      }
+    "expo": {
+        "name": "CineMap",
+        "slug": "CineMap",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "automatic",
+        "newArchEnabled": true,
+        "scheme": "your-app-scheme",
+        "splash": {
+            "image": "./assets/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#1F1D2B"
+        },
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#1F1D2B",
+                "resizeMode": "contain"
+            },
+            "edgeToEdgeEnabled": true,
+            "package": "com.ramon541.CineMap"
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "6ef2606a-362d-4264-8719-410fff752e41"
+            }
+        },
+        "plugins": ["expo-router"]
     }
-  }
 }
