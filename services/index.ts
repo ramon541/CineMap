@@ -10,3 +10,11 @@ export const getTopRatedMovies = async () =>
         method: 'get',
         endpoint: '/movie/top_rated?page=1',
     });
+
+//= =================================================================================
+export const getPopularMovies = async () =>
+    await request<IGetPopularMoviesResponse>({
+        api: apiTMDB,
+        method: 'get',
+        endpoint: '/movie/popular?page=1',
+    });

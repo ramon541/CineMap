@@ -7,14 +7,14 @@ interface IApiRequest {
     config?: AxiosRequestConfig;
 }
 
-interface IGetTopRatedMoviesResponse {
+interface IGetMoviesResponse<T> {
     page: number;
-    results: Array<IGetFilmResult>;
+    results: Array<T>;
     total_pages: number;
     total_results: number;
 }
 
-interface IGetFilmResult {
+interface MovieTMDB {
     adult: boolean;
     backdrop_path: string;
     genre_ids: Array<number>;
@@ -30,3 +30,9 @@ interface IGetFilmResult {
     vote_average: number;
     vote_count: number;
 }
+
+//= =================================================================================
+
+interface IGetTopRatedMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
+
+interface IGetPopularMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}

@@ -786,6 +786,11 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@expo-google-fonts/montserrat@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/montserrat/-/montserrat-0.4.1.tgz#2fc09674023112435c7daf1d7d8e757a0789564c"
+  integrity sha512-jc1d17tadLK3Nc/qIKYyOM2pnxmdZrlPFOJtmNT0qzFdUe4Pzq1Y1eQwvCMSProRbQqsosASRZ/N3mzl6pmC+g==
+
 "@expo/cli@0.24.13":
   version "0.24.13"
   resolved "https://registry.yarnpkg.com/@expo/cli/-/cli-0.24.13.tgz#0066e038982b7143f966d688e76e02d935f0dc8b"

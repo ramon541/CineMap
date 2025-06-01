@@ -1,10 +1,13 @@
 import { useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import BackgroundPoster from '../components/BackgroundPoster';
-import Card from '../components/Card';
 import { Colors } from '../styles';
-import Button from '../components/Button';
+import {
+    ButtonText,
+    BackgroundPoster,
+    Card,
+    TouchableText,
+} from '../components';
 
 function Root() {
     const { navigate } = useRouter();
@@ -30,29 +33,33 @@ function Root() {
                             </Text>
                         </View>
 
-                        <View style={{ gap: 16, alignItems: 'center' }}>
-                            <Button onPress={() => navigate('/signin')}>
-                                <Text style={{ color: Colors.white }}>
-                                    Fazer login
-                                </Text>
-                            </Button>
+                        <View
+                            style={{
+                                gap: 16,
+                                alignItems: 'center',
+                            }}>
+                            <ButtonText
+                                text="Fazer login"
+                                onPress={() => navigate('/signin')}
+                            />
 
-                            <View style={{ flexDirection: 'row' }}>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                }}>
                                 <Text
                                     style={{
                                         color: Colors.grey,
+                                        fontFamily: 'Montserrat_400Regular',
+                                        fontSize: 12,
                                     }}>
                                     Ainda não possui uma conta?{' '}
                                 </Text>
-                                <TouchableOpacity
-                                    onPress={() => navigate('/register')}>
-                                    <Text
-                                        style={{
-                                            color: Colors.primary,
-                                        }}>
-                                        Cadastre-se!
-                                    </Text>
-                                </TouchableOpacity>
+                                <TouchableText
+                                    text="Cadastre-se"
+                                    onPress={() => navigate('/register')}
+                                    fontSize={12}
+                                />
                             </View>
                         </View>
                     </View>
@@ -70,12 +77,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
     },
-    cardWrapper: { padding: 32, width: '100%' },
+    cardWrapper: {
+        padding: 32,
+        width: '100%',
+        zIndex: 1,
+    },
     cardContainer: { padding: 32, gap: 64 },
     title: {
         color: Colors.white,
         fontSize: 18,
-        fontWeight: 'bold',
+        fontFamily: 'Montserrat_700Bold',
         textAlign: 'center',
     },
     subtitle: {
@@ -83,6 +94,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginTop: 32,
         textAlign: 'justify',
+        fontFamily: 'Montserrat_400Regular',
     },
 });
 

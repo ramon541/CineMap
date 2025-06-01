@@ -2,7 +2,7 @@ import { JSX, useEffect, useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 
 import Poster from '../Poster';
-import { getTopRatedMovies } from '../../services';
+import { getPopularMovies } from '../../services';
 
 const { height: screenHeight } = Dimensions.get('screen');
 
@@ -10,8 +10,8 @@ function BackgroundPoster() {
     const [posters, setPosters] = useState<Array<string>>([]);
     useEffect(() => {
         (async () => {
-            const topRatedMovies = await getTopRatedMovies();
-            const posters = topRatedMovies.results
+            const popularMovies = await getPopularMovies();
+            const posters = popularMovies.results
                 .map((movie) => movie.poster_path)
                 .slice(0, 12);
             setPosters(posters);
@@ -19,20 +19,20 @@ function BackgroundPoster() {
     }, []);
 
     //= =================================================================================
-    const arrOpacity = [0.64, 0.12, 0.24, 0.16, 0.2];
+    const arrOpacity = [0.84, 0.36, 0.2, 0.12];
 
     const posterColumns = useMemo(() => {
         const columns = [[], [], []] as Array<Array<JSX.Element>>;
-        posters.forEach((posterUrl, i) => {
+        posters.forEach((posterUrl, index) => {
             const randomOpacityIndex = Math.floor(
                 Math.random() * arrOpacity.length
             );
-            const columnIndex = Math.floor(i / 4);
+            const columnIndex = Math.floor(index / 4);
             columns[columnIndex].push(
                 <Poster
-                    width={126}
+                    width={140}
                     url={posterUrl}
-                    key={`${i}-${posterUrl}`}
+                    key={`${index}-${posterUrl}`}
                     opacity={arrOpacity[randomOpacityIndex]}
                 />
             );
@@ -55,6 +55,7 @@ const defaultGap = 18;
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
+        zIndex: 0,
         width: '100%',
         height: screenHeight,
         flexDirection: 'row',

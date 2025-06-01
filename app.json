@@ -9,7 +9,7 @@
         "newArchEnabled": true,
         "scheme": "your-app-scheme",
         "splash": {
-            "image": "./assets/splash-icon.png",
+            "image": "./assets/splash.png",
             "resizeMode": "contain",
             "backgroundColor": "#1F1D2B"
         },
@@ -26,13 +26,24 @@
             "package": "com.ramon541.CineMap"
         },
         "web": {
-            "favicon": "./assets/favicon.png"
+            "favicon": "./assets/adaptive-icon.png"
         },
         "extra": {
             "eas": {
                 "projectId": "6ef2606a-362d-4264-8719-410fff752e41"
             }
         },
-        "plugins": ["expo-router"]
+        "plugins": [
+            "expo-router",
+            "expo-font",
+            [
+                "expo-splash-screen",
+                {
+                    "backgroundColor": "#1F1D2B",
+                    "image": "./assets/icon.png",
+                    "imageWidth": 200
+                }
+            ]
+        ]
     }
 }
