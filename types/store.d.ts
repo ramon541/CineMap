@@ -1,4 +1,7 @@
 interface IAppState {
+    user: IUser | null;
+    setUser: (user: IUser | null) => void;
+
     snackbarInfo: ISnackbarProps;
     setSnackbarInfo: (snackbarInfo: ISnackbarProps) => void;
 }

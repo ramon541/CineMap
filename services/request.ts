@@ -35,6 +35,8 @@ export const request = async <T>({
                 reqExpire,
             ])) as AxiosResponse<T>;
 
+            if (axios.isAxiosError(response)) reject(response);
+
             resolve(response?.data);
         } catch (error) {
             reject(error);

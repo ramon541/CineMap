@@ -1,19 +1,19 @@
 import axios, { AxiosError } from 'axios';
 
 // = ============================================================
-const api = axios.create({
-    baseURL: 'http://localhost:3000',
+const apiImageTMDB = axios.create({
+    baseURL: 'https://image.tmdb.org/t/p/w500',
 });
 
 // = ============================================================
-api.interceptors.request.use(async (request) => {
+apiImageTMDB.interceptors.request.use(async (request) => {
     console.log('REQUEST: ', request);
 
     return request;
 });
 
 // = ============================================================
-api.interceptors.response.use(
+apiImageTMDB.interceptors.response.use(
     async (response) => {
         console.log('RESPONSE: ', response);
 
@@ -27,4 +27,4 @@ api.interceptors.response.use(
     }
 );
 
-export default api;
+export default apiImageTMDB;

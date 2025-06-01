@@ -1,25 +1,23 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Slot } from 'expo-router';
 
 import { Colors } from '../styles';
 import Providers from '../Providers';
 import { Toast } from '../components';
 import '../libs/mmkv-config';
-import Home from './home';
 
 export default function App() {
     return (
         <Providers>
-            <SafeAreaView
+            <View
                 style={[
                     styles.container,
                     { backgroundColor: Colors.background },
                 ]}>
-                <Home />
                 <StatusBar style="light" />
-                <Text style={{ color: 'white' }}>Hello World!</Text>
-            </SafeAreaView>
+                <Slot />
+            </View>
             <Toast />
         </Providers>
     );

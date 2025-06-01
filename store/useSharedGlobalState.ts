@@ -5,6 +5,9 @@ import { storageService } from '.';
 export const useGlobalStore = create<IAppState>()(
     persist(
         (set) => ({
+            user: null,
+            setUser: (user) => set({ user }),
+
             snackbarInfo: {
                 visible: false,
                 text: '',

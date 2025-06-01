@@ -1,19 +1,25 @@
 import axios, { AxiosError } from 'axios';
 
 // = ============================================================
-const api = axios.create({
-    baseURL: 'http://localhost:3000',
+const apiTMDB = axios.create({
+    baseURL: 'https://api.themoviedb.org/3',
 });
 
 // = ============================================================
-api.interceptors.request.use(async (request) => {
+apiTMDB.interceptors.request.use(async (request) => {
     console.log('REQUEST: ', request);
+
+    request.headers.Authorization = `Bearer ${process.env.EXPO_PUBLIC_TMDB_KEY}`;
+    if (request.url) {
+        request.url +=
+            (request.url.includes('?') ? '&' : '?') + 'language=pt-BR';
+    }
 
     return request;
 });
 
 // = ============================================================
-api.interceptors.response.use(
+apiTMDB.interceptors.response.use(
     async (response) => {
         console.log('RESPONSE: ', response);
 
@@ -27,4 +33,4 @@ api.interceptors.response.use(
     }
 );
 
-export default api;
+export default apiTMDB;
