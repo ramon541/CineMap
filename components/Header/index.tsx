@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { EFontFamily } from '../../enums';
-import { IconRounded, Text } from '../';
+import IconRounded from '../IconRounded';
+import Text from '../Text';
 
 function Header({ title, onPressBack }: IHeaderProps) {
     return (

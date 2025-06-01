@@ -1,6 +1,6 @@
 import { TouchableOpacity } from 'react-native';
 import { Colors } from '../../styles';
-import { Text } from '../';
+import Text from '../Text';
 import { EFontFamily } from '../../enums';
 
 function TouchableText({ text, onPress, fontSize = 16 }: TouchableTextProps) {

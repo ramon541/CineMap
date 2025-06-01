@@ -1,8 +1,8 @@
 import { ComponentProps, memo } from 'react';
-
+import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import _default from '@expo/vector-icons/build/Ionicons';
-import { StyleSheet, View } from 'react-native';
+
 import { Colors } from '../../styles';
 
 function IconRounded({

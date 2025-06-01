@@ -1,7 +1,7 @@
 import { Snackbar } from 'react-native-paper';
 
 import { useGlobalStore } from '../../store/useSharedGlobalState';
-import { Text } from '../';
+import Text from '../Text';
 
 export default function Toast() {
     const { snackbarInfo } = useGlobalStore();

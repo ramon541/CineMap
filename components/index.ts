@@ -8,6 +8,8 @@ import TouchableText from './TouchableText';
 import IconRounded from './IconRounded';
 import Header from './Header';
 import Text from './Text';
+import TitleDescription from './TitleDescription';
+import InputBase from './InputBase';
 
 export {
     Toast,
@@ -20,4 +22,6 @@ export {
     IconRounded,
     Header,
     Text,
+    TitleDescription,
+    InputBase,
 };

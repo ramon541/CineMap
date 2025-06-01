@@ -1,0 +1,3 @@
+interface IInputBaseProps {
+    label: string;
+}
