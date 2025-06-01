@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Colors } from '../styles';
 import {
@@ -7,7 +7,9 @@ import {
     BackgroundPoster,
     Card,
     TouchableText,
+    Text,
 } from '../components';
+import { EFontFamily } from '../enums';
 
 function Root() {
     const { navigate } = useRouter();
@@ -21,16 +23,23 @@ function Root() {
                 <Card borderRadius={32}>
                     <View style={styles.cardContainer}>
                         <View>
-                            <Text style={styles.title}>
-                                Descubra, registre e compartilhe seus filmes
-                                favoritos
-                            </Text>
-                            <Text style={styles.subtitle}>
-                                Acompanhe tudo o que você assiste, crie listas
+                            <Text
+                                text="Descubra, registre e compartilhe seus filmes
+                                favoritos"
+                                fontSize={18}
+                                fontFamily={EFontFamily.Bold}
+                                style={styles.title}
+                            />
+
+                            <Text
+                                text="Acompanhe tudo o que você assiste, crie listas
                                 personalizadas e veja o que outras pessoas estão
                                 comentando. O CineMap é a rede social para você,
-                                amante do cinema!
-                            </Text>
+                                amante do cinema!"
+                                color={Colors.grey}
+                                fontSize={14}
+                                style={styles.subtitle}
+                            />
                         </View>
 
                         <View
@@ -48,13 +57,10 @@ function Root() {
                                     flexDirection: 'row',
                                 }}>
                                 <Text
-                                    style={{
-                                        color: Colors.grey,
-                                        fontFamily: 'Montserrat_400Regular',
-                                        fontSize: 12,
-                                    }}>
-                                    Ainda não possui uma conta?{' '}
-                                </Text>
+                                    text={`Ainda não possui uma conta?${' '}`}
+                                    color={Colors.grey}
+                                    fontSize={12}
+                                />
                                 <TouchableText
                                     text="Cadastre-se"
                                     onPress={() =>
@@ -86,15 +92,9 @@ const styles = StyleSheet.create({
     },
     cardContainer: { padding: 32, gap: 64 },
     title: {
-        color: Colors.white,
-        fontSize: 18,
-        fontFamily: 'Montserrat_700Bold',
         textAlign: 'center',
     },
     subtitle: {
-        color: Colors.grey,
-        fontSize: 14,
-        marginTop: 32,
         textAlign: 'justify',
         fontFamily: 'Montserrat_400Regular',
     },

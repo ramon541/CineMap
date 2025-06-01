@@ -1,12 +1,18 @@
 import { memo } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { IconRounded } from '../';
-import { Colors } from '../../styles';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { EFontFamily } from '../../enums';
+import { IconRounded, Text } from '../';
 
 function Header({ title, onPressBack }: IHeaderProps) {
     return (
         <View style={styles.container}>
-            {title && <Text style={styles.title}>{title}</Text>}
+            {title && (
+                <Text
+                    text={title}
+                    fontFamily={EFontFamily.Bold}
+                    style={styles.title}
+                />
+            )}
             <View style={styles.iconBackWrapper}>
                 <TouchableOpacity onPress={onPressBack}>
                     <IconRounded iconName="chevron-back-outline" size={35} />
@@ -27,11 +33,8 @@ const styles = StyleSheet.create({
     },
     iconBackWrapper: { left: 24, position: 'absolute' },
     title: {
-        fontFamily: 'Montserrat_700Bold',
-        fontSize: 16,
         textAlign: 'center',
         width: '100%',
-        color: Colors.white,
     },
 });
 

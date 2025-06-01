@@ -1,6 +1,6 @@
 import { Slot, useRouter } from 'expo-router';
 import { useRouteInfo } from 'expo-router/build/hooks';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../components';
 
@@ -15,10 +15,9 @@ function AuthStackLayout() {
         return '';
     }
     return (
-        <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <SafeAreaView style={styles.container}>
             <Header onPressBack={back} title={useAuthTitle()} />
-            <View
-                style={{ flex: 1, width: '100%', height: '100%', padding: 24 }}>
+            <View style={styles.contentWrapper}>
                 <Slot />
             </View>
         </SafeAreaView>
@@ -27,13 +26,8 @@ function AuthStackLayout() {
 
 //= =================================================================================
 const styles = StyleSheet.create({
-    headerContainer: {
-        width: '100%',
-        height: 35,
-        alignItems: 'center',
-        flexDirection: 'row',
-        backgroundColor: 'red',
-    },
+    container: { flex: 1, width: '100%', height: '100%' },
+    contentWrapper: { flex: 1, width: '100%', height: '100%', padding: 24 },
 });
 
 //= =================================================================================

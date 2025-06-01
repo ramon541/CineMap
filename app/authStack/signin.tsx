@@ -6,7 +6,7 @@ function SignIn() {
     const { navigate } = useRouter();
     const { setUser } = useGlobalStore();
     return (
-        <View>
+        <>
             <Text>Signin page!</Text>
             <Button
                 title="Esqueci minha senha"
@@ -21,7 +21,7 @@ function SignIn() {
                     navigate('/home');
                 }}
             />
-        </View>
+        </>
     );
 }
 

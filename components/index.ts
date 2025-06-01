@@ -7,6 +7,7 @@ import BackgroundPoster from './BackgroundPoster';
 import TouchableText from './TouchableText';
 import IconRounded from './IconRounded';
 import Header from './Header';
+import Text from './Text';
 
 export {
     Toast,
@@ -18,4 +19,5 @@ export {
     TouchableText,
     IconRounded,
     Header,
+    Text,
 };

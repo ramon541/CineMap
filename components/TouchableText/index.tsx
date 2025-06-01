@@ -1,17 +1,17 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Colors } from '../../styles';
+import { Text } from '../';
+import { EFontFamily } from '../../enums';
 
 function TouchableText({ text, onPress, fontSize = 16 }: TouchableTextProps) {
     return (
         <TouchableOpacity onPress={onPress}>
             <Text
-                style={{
-                    color: Colors.primary,
-                    fontFamily: 'Montserrat_700Bold',
-                    fontSize: fontSize,
-                }}>
-                {text}
-            </Text>
+                text={text}
+                color={Colors.primary}
+                fontFamily={EFontFamily.Bold}
+                fontSize={fontSize}
+            />
         </TouchableOpacity>
     );
 }
