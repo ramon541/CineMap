@@ -51,7 +51,7 @@ function BackgroundPoster() {
 }
 
 //= =================================================================================
-const defaultGap = 18;
+const defaultGap = 16;
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',

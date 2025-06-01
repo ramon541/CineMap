@@ -40,7 +40,7 @@ function Root() {
                             }}>
                             <ButtonText
                                 text="Fazer login"
-                                onPress={() => navigate('/signin')}
+                                onPress={() => navigate('/authStack/signin')}
                             />
 
                             <View
@@ -57,7 +57,9 @@ function Root() {
                                 </Text>
                                 <TouchableText
                                     text="Cadastre-se"
-                                    onPress={() => navigate('/register')}
+                                    onPress={() =>
+                                        navigate('/authStack/register')
+                                    }
                                     fontSize={12}
                                 />
                             </View>
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     cardWrapper: {
-        padding: 32,
+        padding: 24,
         width: '100%',
         zIndex: 1,
     },
