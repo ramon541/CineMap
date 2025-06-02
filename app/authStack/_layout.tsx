@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../components';
 
 function AuthStackLayout() {
-    const { back } = useRouter();
+    const { back, canGoBack } = useRouter();
     const { pathname } = useRouteInfo();
 
     function useAuthTitle() {
@@ -23,7 +23,12 @@ function AuthStackLayout() {
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
                 <ScrollView>
-                    <Header onPressBack={back} title={useAuthTitle()} />
+                    <Header
+                        onPressBack={() => {
+                            if (canGoBack()) back();
+                        }}
+                        title={useAuthTitle()}
+                    />
                     <View style={styles.contentWrapper}>
                         <Slot />
                     </View>

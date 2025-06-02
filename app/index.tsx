@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
+import { getBottomBar } from '../utils';
 
 import { Colors } from '../styles';
 import {
@@ -47,7 +48,8 @@ function Root() {
                             style={{
                                 gap: 16,
                                 alignItems: 'center',
-                            }}>
+                            }}
+                        >
                             <ButtonText
                                 text="Fazer login"
                                 onPress={() => navigate('/authStack/signin')}
@@ -56,7 +58,8 @@ function Root() {
                             <View
                                 style={{
                                     flexDirection: 'row',
-                                }}>
+                                }}
+                            >
                                 <Text
                                     text={`Ainda não possui uma conta?${' '}`}
                                     color={Colors.grey}
@@ -90,6 +93,7 @@ const styles = StyleSheet.create({
         padding: 24,
         width: '100%',
         zIndex: 1,
+        marginBottom: getBottomBar(),
     },
     cardContainer: { padding: 32, gap: 64 },
     textContainer: { gap: 32 },

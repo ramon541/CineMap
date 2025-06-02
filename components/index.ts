@@ -11,6 +11,7 @@ import Text from './Text';
 import TitleDescription from './TitleDescription';
 import InputBase from './InputBase';
 import TextInput from './TextInput';
+import InputError from './InputError';
 
 export {
     Toast,
@@ -26,4 +27,5 @@ export {
     TitleDescription,
     InputBase,
     TextInput,
+    InputError,
 };

@@ -1,20 +1,11 @@
-import {
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-    View,
-} from 'react-native';
-import { useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import userSchema, { IUserZod } from './userSchema';
-import InputBase from '../../InputBase';
 import TextInput from '../../TextInput';
-import { Colors } from '../../../styles';
 import ButtonText from '../../ButtonText';
-import Text from '../../Text';
-import { EFontFamily } from '../../../enums';
+import InputError from '../../InputError';
 
 function RegisterUserForm() {
     const {
@@ -37,46 +28,32 @@ function RegisterUserForm() {
                 control={control}
                 name="name"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <View>
-                        <InputBase label="Nome">
-                            <TextInput
-                                placeholder="Exemplo da Silva"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                            />
-                        </InputBase>
-                        <Text
-                            text={errors.name?.message || ' '}
-                            fontSize={12}
-                            fontFamily={EFontFamily.SemiBold}
-                            color={Colors.red}
-                            style={{ marginTop: 8, marginLeft: 16 }}
+                    <InputError label="Nome" error={errors.name?.message}>
+                        <TextInput
+                            placeholder="Exemplo da Silva"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
                         />
-                    </View>
+                    </InputError>
                 )}
             />
+
             <Controller
                 control={control}
                 name="nickname"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <View>
-                        <InputBase label="Apelido">
-                            <TextInput
-                                placeholder="cinema123"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                            />
-                        </InputBase>
-                        <Text
-                            text={errors.nickname?.message || ' '}
-                            fontSize={12}
-                            fontFamily={EFontFamily.SemiBold}
-                            color={Colors.red}
-                            style={{ marginTop: 8, marginLeft: 16 }}
+                    <InputError
+                        label="Apelido"
+                        error={errors.nickname?.message}
+                    >
+                        <TextInput
+                            placeholder="cinema123"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
                         />
-                    </View>
+                    </InputError>
                 )}
             />
 
@@ -84,24 +61,15 @@ function RegisterUserForm() {
                 control={control}
                 name="email"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <View>
-                        <InputBase label="E-mail">
-                            <TextInput
-                                placeholder="seu.email@email.com"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                                textContentType="emailAddress"
-                            />
-                        </InputBase>
-                        <Text
-                            text={errors.email?.message || ' '}
-                            fontSize={12}
-                            fontFamily={EFontFamily.SemiBold}
-                            color={Colors.red}
-                            style={{ marginTop: 8, marginLeft: 16 }}
+                    <InputError label="E-mail" error={errors.email?.message}>
+                        <TextInput
+                            placeholder="seu.email@email.com"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                            textContentType="emailAddress"
                         />
-                    </View>
+                    </InputError>
                 )}
             />
 
@@ -109,24 +77,19 @@ function RegisterUserForm() {
                 control={control}
                 name="birthDate"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <View>
-                        <InputBase label="Data de Nascimento">
-                            <TextInput
-                                placeholder="00/00/0000"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value ? value.toString() : ''}
-                                textContentType="birthdateDay"
-                            />
-                        </InputBase>
-                        <Text
-                            text={errors.birthDate?.message || ' '}
-                            fontSize={12}
-                            fontFamily={EFontFamily.SemiBold}
-                            color={Colors.red}
-                            style={{ marginTop: 8, marginLeft: 16 }}
+                    <InputError
+                        label="Data de Nascimento"
+                        error={errors.birthDate?.message}
+                    >
+                        <TextInput
+                            placeholder="00/00/0000"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value ? value.toString() : ''}
+                            textContentType="birthdateDay"
+                            keyboardType="numeric"
                         />
-                    </View>
+                    </InputError>
                 )}
             />
 
@@ -134,23 +97,14 @@ function RegisterUserForm() {
                 control={control}
                 name="password"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <View>
-                        <InputBase label="Senha">
-                            <TextInput
-                                placeholder="*********"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value ? value.toString() : ''}
-                            />
-                        </InputBase>
-                        <Text
-                            text={errors.password?.message || ' '}
-                            fontSize={12}
-                            fontFamily={EFontFamily.SemiBold}
-                            color={Colors.red}
-                            style={{ marginTop: 8, marginLeft: 16 }}
+                    <InputError label="Senha" error={errors.password?.message}>
+                        <TextInput
+                            placeholder="*********"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value ? value.toString() : ''}
                         />
-                    </View>
+                    </InputError>
                 )}
             />
 
