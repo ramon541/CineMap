@@ -22,7 +22,7 @@ function Root() {
             <View style={styles.cardWrapper}>
                 <Card borderRadius={32}>
                     <View style={styles.cardContainer}>
-                        <View>
+                        <View style={styles.textContainer}>
                             <Text
                                 text="Descubra, registre e compartilhe seus filmes
                                 favoritos"
@@ -37,6 +37,7 @@ function Root() {
                                 comentando. O CineMap é a rede social para você,
                                 amante do cinema!"
                                 color={Colors.grey}
+                                fontFamily={EFontFamily.SemiBold}
                                 fontSize={14}
                                 style={styles.subtitle}
                             />
@@ -91,12 +92,12 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     cardContainer: { padding: 32, gap: 64 },
+    textContainer: { gap: 32 },
     title: {
         textAlign: 'center',
     },
     subtitle: {
         textAlign: 'justify',
-        fontFamily: 'Montserrat_400Regular',
     },
 });
 

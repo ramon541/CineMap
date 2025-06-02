@@ -1,6 +1,11 @@
 import { Slot, useRouter } from 'expo-router';
 import { useRouteInfo } from 'expo-router/build/hooks';
-import { StyleSheet, View } from 'react-native';
+import {
+    KeyboardAvoidingView,
+    ScrollView,
+    StyleSheet,
+    View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../components';
 
@@ -16,10 +21,14 @@ function AuthStackLayout() {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Header onPressBack={back} title={useAuthTitle()} />
-            <View style={styles.contentWrapper}>
-                <Slot />
-            </View>
+            <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
+                <ScrollView>
+                    <Header onPressBack={back} title={useAuthTitle()} />
+                    <View style={styles.contentWrapper}>
+                        <Slot />
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }

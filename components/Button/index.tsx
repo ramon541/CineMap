@@ -2,9 +2,16 @@ import { PropsWithChildren } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../styles';
 
-function Button({ onPress, children }: PropsWithChildren<ButtonProps>) {
+function Button({
+    onPress,
+    disabled = false,
+    children,
+}: PropsWithChildren<ButtonProps>) {
     return (
-        <TouchableOpacity onPress={onPress} style={styles.container}>
+        <TouchableOpacity
+            onPress={onPress}
+            style={styles.container}
+            disabled={disabled}>
             <View style={styles.wrapper}>{children}</View>
         </TouchableOpacity>
     );

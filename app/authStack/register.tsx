@@ -1,5 +1,7 @@
-import { StyleSheet, TextInput, View } from 'react-native';
-import { InputBase, Text, TitleDescription } from '../../components';
+import { StyleSheet, View } from 'react-native';
+import { InputBase, TitleDescription, TextInput } from '../../components';
+import { Colors } from '../../styles';
+import RegisterUserForm from '../../components/Forms/RegisterUserForm';
 
 function Register() {
     return (
@@ -9,10 +11,7 @@ function Register() {
                 description={`Descubra, avalie e comente sobre\nos melhores títulos`}
             />
             <View style={styles.formContainer}>
-                <InputBase label="E-mail">
-                    {/* <Text text="Aqui vem a birosca" /> */}
-                    <TextInput placeholder="Aqui vem a birosca" />
-                </InputBase>
+                <RegisterUserForm />
             </View>
         </>
     );
