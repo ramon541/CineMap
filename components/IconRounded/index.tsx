@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import _default from '@expo/vector-icons/build/Ionicons';
 
 import { Colors } from '../../styles';
+import Icon from '../Icon';
 
 function IconRounded({
     iconName,
@@ -15,7 +16,7 @@ function IconRounded({
                 styles.container,
                 { width: size, height: size, borderRadius: size * 0.4 },
             ]}>
-            <Ionicons name={iconName} color={Colors.white} size={size * 0.8} />
+            <Icon name={iconName} size={size * 0.8} />
         </View>
     );
 }

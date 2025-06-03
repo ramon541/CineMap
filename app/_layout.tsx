@@ -13,7 +13,7 @@ import {
 } from '@expo-google-fonts/montserrat';
 
 import { Colors } from '../styles';
-import Providers from '../Providers';
+import Providers from '../providers';
 import { Toast } from '../components';
 import '../libs/mmkv-config';
 
@@ -55,8 +55,7 @@ export default function RootLayout() {
                 style={[
                     styles.container,
                     { backgroundColor: Colors.background },
-                ]}
-            >
+                ]}>
                 <StatusBar style="light" />
                 <Slot />
             </View>

@@ -1,25 +1,51 @@
 import { StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'expo-router';
 
+import { useShowSnackbar } from '../../../hooks';
 import userSchema, { IUserZod } from './userSchema';
 import TextInput from '../../TextInput';
 import ButtonText from '../../ButtonText';
 import InputError from '../../InputError';
 import { dateMask } from '../../../utils';
+import InputPassword from '../../InputPassword';
+import { registerUser } from '../../../services';
+import { Colors } from '../../../styles';
 
 function RegisterUserForm() {
     const {
         control,
         handleSubmit,
+        reset,
         formState: { errors, isLoading },
     } = useForm<IUserZod>({
         resolver: zodResolver(userSchema),
     });
+    const showSnackbar = useShowSnackbar();
+    const { navigate } = useRouter();
 
     //= =================================================================================
-    function onSubmit(data: IUserZod) {
-        console.log('Form submitted with data:', data);
+    async function onSubmit(data: IUserZod) {
+        try {
+            await registerUser(data);
+
+            showSnackbar({
+                text: 'Cadastro criado com sucesso!',
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+            });
+            navigate('/authStack/signin');
+            reset();
+        } catch (error) {
+            showSnackbar({
+                text: `Erro ao criar cadastro. ${
+                    (error as Error)?.message || 'Tente novamente mais tarde.'
+                }`,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+            });
+        }
     }
 
     //= =================================================================================
@@ -35,6 +61,7 @@ function RegisterUserForm() {
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            maxLength={40}
                         />
                     </InputError>
                 )}
@@ -46,13 +73,13 @@ function RegisterUserForm() {
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError
                         label="Apelido"
-                        error={errors.nickname?.message}
-                    >
+                        error={errors.nickname?.message}>
                         <TextInput
                             placeholder="cinema123"
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            maxLength={20}
                         />
                     </InputError>
                 )}
@@ -68,7 +95,8 @@ function RegisterUserForm() {
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
-                            textContentType="emailAddress"
+                            keyboardType="email-address"
+                            maxLength={40}
                         />
                     </InputError>
                 )}
@@ -80,8 +108,7 @@ function RegisterUserForm() {
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError
                         label="Data de Nascimento"
-                        error={errors.birthDate?.message}
-                    >
+                        error={errors.birthDate?.message}>
                         <TextInput
                             placeholder="00/00/0000"
                             onBlur={onBlur}
@@ -100,11 +127,12 @@ function RegisterUserForm() {
                 name="password"
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError label="Senha" error={errors.password?.message}>
-                        <TextInput
-                            placeholder="*********"
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value ? value.toString() : ''}
+                        <InputPassword
+                            inputProps={{
+                                onBlur: onBlur,
+                                onChangeText: onChange,
+                                value: value ? value.toString() : '',
+                            }}
                         />
                     </InputError>
                 )}

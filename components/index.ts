@@ -12,6 +12,9 @@ import TitleDescription from './TitleDescription';
 import InputBase from './InputBase';
 import TextInput from './TextInput';
 import InputError from './InputError';
+import Icon from './Icon';
+import InputIcon from './InputIcon';
+import InputPassword from './InputPassword';
 
 export {
     Toast,
@@ -28,4 +31,7 @@ export {
     InputBase,
     TextInput,
     InputError,
+    Icon,
+    InputIcon,
+    InputPassword,
 };

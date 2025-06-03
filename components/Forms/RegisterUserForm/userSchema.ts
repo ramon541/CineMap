@@ -28,9 +28,23 @@ const userSchema = z.object({
         .string({ required_error: 'A data de nascimento é obrigatória' })
         .refine(
             (val) => {
-                const iso = toISODate(val);
-                if (!iso || isNaN(Date.parse(iso))) return false;
+                const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+                const match = val.match(regex);
+                if (!match) return false;
+
+                const [_, day, month, year] = match;
+                const iso = `${year}-${month}-${day}`;
                 const parsedDate = new Date(iso);
+
+                if (
+                    isNaN(parsedDate.getTime()) ||
+                    parsedDate.getDate() !== Number(day) ||
+                    parsedDate.getMonth() + 1 !== Number(month) ||
+                    parsedDate.getFullYear() !== Number(year)
+                ) {
+                    return false;
+                }
+
                 return parsedDate >= maxDate && parsedDate <= today;
             },
             {
