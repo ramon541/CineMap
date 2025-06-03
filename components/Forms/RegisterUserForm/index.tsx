@@ -6,6 +6,7 @@ import userSchema, { IUserZod } from './userSchema';
 import TextInput from '../../TextInput';
 import ButtonText from '../../ButtonText';
 import InputError from '../../InputError';
+import { dateMask } from '../../../utils';
 
 function RegisterUserForm() {
     const {
@@ -84,10 +85,11 @@ function RegisterUserForm() {
                         <TextInput
                             placeholder="00/00/0000"
                             onBlur={onBlur}
-                            onChangeText={onChange}
+                            onChangeText={(text) => onChange(dateMask(text))}
                             value={value ? value.toString() : ''}
                             textContentType="birthdateDay"
                             keyboardType="numeric"
+                            maxLength={10}
                         />
                     </InputError>
                 )}

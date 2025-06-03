@@ -1,10 +1,12 @@
 import z from 'zod';
+import { toISODate } from '../../../utils';
 
-function toISODate(brDate: string) {
-    const [day, month, year] = brDate.split('/');
-    if (!day || !month || !year) return '';
-    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-}
+const today = new Date();
+const maxDate = new Date(
+    today.getFullYear() - 150,
+    today.getMonth(),
+    today.getDate()
+);
 
 export const UserType = z.enum(['A', 'C']);
 
@@ -27,9 +29,13 @@ const userSchema = z.object({
         .refine(
             (val) => {
                 const iso = toISODate(val);
-                return !!iso && !isNaN(Date.parse(iso));
+                if (!iso || isNaN(Date.parse(iso))) return false;
+                const parsedDate = new Date(iso);
+                return parsedDate >= maxDate && parsedDate <= today;
             },
-            { message: 'Data inválida' }
+            {
+                message: `A data de nascimento deve ser válida!`,
+            }
         )
         .transform((val) => toISODate(val)),
 });
