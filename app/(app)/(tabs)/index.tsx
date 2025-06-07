@@ -4,7 +4,7 @@ import { useShowSnackbar } from '../../../hooks';
 import { useGlobalStore } from '../../../store/useSharedGlobalState';
 import { useRouter } from 'expo-router';
 
-export default function Home() {
+export default function HomeScreen() {
     const { navigate } = useRouter();
     const showSnackbar = useShowSnackbar();
     const { setUser } = useGlobalStore();

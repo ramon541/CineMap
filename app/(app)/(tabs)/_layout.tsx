@@ -1,14 +1,19 @@
 import { Tabs } from 'expo-router';
 import { Icon } from '../../../components';
 import { Colors } from '../../../styles';
+import { View } from 'react-native';
 
 export default function TabLayout() {
     return (
-        <Tabs screenOptions={{ tabBarActiveTintColor: Colors.primary }}>
+        <Tabs
+            screenOptions={{
+                tabBarActiveTintColor: Colors.primary,
+                tabBarInactiveTintColor: Colors.grey,
+                headerShown: false,
+            }}>
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Home',
                     tabBarIcon: ({ color }) => (
                         <Icon size={28} name="home" color={color} />
                     ),
@@ -17,7 +22,6 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="profile"
                 options={{
-                    title: 'Perfil',
                     tabBarIcon: ({ color }) => (
                         <Icon size={28} name="person" color={color} />
                     ),
