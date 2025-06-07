@@ -26,7 +26,7 @@ function LoginUserForm() {
     });
     const showSnackbar = useShowSnackbar();
     const { navigate } = useRouter();
-    const { setUser, setToken } = useGlobalStore();
+    const { setUser, setToken, setAlreadyLoggedIn } = useGlobalStore();
 
     //= =================================================================================
     async function onSubmit(data: ILoginZod) {
@@ -42,8 +42,9 @@ function LoginUserForm() {
             });
             setUser(user);
             setToken(accessToken);
+            setAlreadyLoggedIn(true);
 
-            navigate('/home');
+            navigate('(tabs)/');
             reset();
         } catch (error) {
             showSnackbar({

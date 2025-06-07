@@ -48,8 +48,7 @@ function Root() {
                             style={{
                                 gap: 16,
                                 alignItems: 'center',
-                            }}
-                        >
+                            }}>
                             <ButtonText
                                 text="Fazer login"
                                 onPress={() => navigate('/authStack/signin')}
@@ -58,8 +57,7 @@ function Root() {
                             <View
                                 style={{
                                     flexDirection: 'row',
-                                }}
-                            >
+                                }}>
                                 <Text
                                     text={`Ainda não possui uma conta?${' '}`}
                                     color={Colors.grey}

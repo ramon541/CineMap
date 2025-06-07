@@ -2,12 +2,10 @@ import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import LoginUserForm from '../../components/Forms/LoginUserForm';
-import { TitleDescription, TouchableText } from '../../components';
+import { TitleDescription } from '../../components';
 import { getGreeting } from '../../utils';
 
 function SignIn() {
-    const { navigate } = useRouter();
-
     return (
         <>
             <TitleDescription

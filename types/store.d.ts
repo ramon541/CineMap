@@ -9,6 +9,9 @@ interface IAppState {
 
     snackbarInfo: ISnackbarProps;
     setSnackbarInfo: (snackbarInfo: ISnackbarProps) => void;
+
+    alreadyLoggedIn: boolean;
+    setAlreadyLoggedIn: (alreadyLoggedIn: boolean) => void;
 }
 
 interface IStorageService {

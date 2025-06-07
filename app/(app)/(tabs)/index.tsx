@@ -10,7 +10,8 @@ export default function Home() {
     const { setUser } = useGlobalStore();
 
     return (
-        <View>
+        <View
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ color: 'white' }}>Hello World!</Text>
             <Button
                 title="Teste"

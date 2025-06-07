@@ -19,6 +19,9 @@ export const useGlobalStore = create<IAppState>()(
             },
             setSnackbarInfo: (newSnarckbarInfo) =>
                 set({ snackbarInfo: newSnarckbarInfo }),
+
+            alreadyLoggedIn: false,
+            setAlreadyLoggedIn: (alreadyLoggedIn) => set({ alreadyLoggedIn }),
         }),
         {
             name: 'app-name-global-storage',
