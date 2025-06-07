@@ -4,10 +4,17 @@ import { useGlobalStore } from '../../store/useSharedGlobalState';
 import Text from '../Text';
 
 export default function Toast() {
-    const { snackbarInfo } = useGlobalStore();
+    const { snackbarInfo, setSnackbarInfo } = useGlobalStore();
     return (
         <Snackbar
-            onDismiss={() => null}
+            onDismiss={() => {
+                setSnackbarInfo({
+                    visible: false,
+                    text: '',
+                    textColor: '',
+                    backgroundColor: '',
+                });
+            }}
             visible={snackbarInfo.visible}
             style={{
                 backgroundColor: snackbarInfo.backgroundColor,

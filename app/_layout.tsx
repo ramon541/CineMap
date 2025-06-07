@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Slot } from 'expo-router';
+import { Slot, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import {
     useFonts,
@@ -16,6 +16,7 @@ import { Colors } from '../styles';
 import Providers from '../providers';
 import { Toast } from '../components';
 import '../libs/mmkv-config';
+import { useGlobalStore } from '../store/useSharedGlobalState';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,6 +33,8 @@ export default function RootLayout() {
         Montserrat_700Bold,
         Montserrat_900Black,
     });
+    const { replace } = useRouter();
+    const { user, token } = useGlobalStore();
 
     const [appIsReady, setAppIsReady] = useState(false);
 
@@ -42,6 +45,14 @@ export default function RootLayout() {
             SplashScreen.hideAsync();
         }
     }, [fontsLoaded]);
+
+    //= =================================================================================
+    useEffect(() => {
+        if (appIsReady) {
+            const isUserLoggedIn = Boolean(user) && Boolean(token);
+            if (isUserLoggedIn) replace('/(tabs)/');
+        }
+    }, [appIsReady, user, token, replace]);
 
     //= =================================================================================
     if (!appIsReady) {

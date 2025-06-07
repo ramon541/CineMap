@@ -9,7 +9,7 @@ export function useShowSnackbar() {
     const { snackbarInfo, setSnackbarInfo } = useGlobalStore();
 
     return useCallback(
-        ({
+        async ({
             duration = 3000,
             text,
             textColor = Colors.white,
@@ -22,7 +22,7 @@ export function useShowSnackbar() {
                 backgroundColor: backgroundColor,
             });
 
-            wait(duration).then(() => {
+            await wait(duration).then(() => {
                 setSnackbarInfo({
                     visible: false,
                     text: '',

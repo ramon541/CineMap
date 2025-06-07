@@ -11,71 +11,78 @@ import {
     Text,
 } from '../components';
 import { EFontFamily } from '../enums';
+import { useGlobalStore } from '../store/useSharedGlobalState';
 
 function Root() {
+    const { user, token } = useGlobalStore();
     const { navigate } = useRouter();
 
+    const isUserLoggedIn = Boolean(user) && Boolean(token);
     //= =================================================================================
     return (
-        <View style={styles.container}>
-            <BackgroundPoster />
+        !isUserLoggedIn && (
+            <View style={styles.container}>
+                <BackgroundPoster />
 
-            <View style={styles.cardWrapper}>
-                <Card borderRadius={32}>
-                    <View style={styles.cardContainer}>
-                        <View style={styles.textContainer}>
-                            <Text
-                                text="Descubra, registre e compartilhe seus filmes
+                <View style={styles.cardWrapper}>
+                    <Card borderRadius={32}>
+                        <View style={styles.cardContainer}>
+                            <View style={styles.textContainer}>
+                                <Text
+                                    text="Descubra, registre e compartilhe seus filmes
                                 favoritos"
-                                fontSize={18}
-                                fontFamily={EFontFamily.Bold}
-                                style={styles.title}
-                            />
+                                    fontSize={18}
+                                    fontFamily={EFontFamily.Bold}
+                                    style={styles.title}
+                                />
 
-                            <Text
-                                text="Acompanhe tudo o que você assiste, crie listas
+                                <Text
+                                    text="Acompanhe tudo o que você assiste, crie listas
                                 personalizadas e veja o que outras pessoas estão
                                 comentando. O CineMap é a rede social para você,
                                 amante do cinema!"
-                                color={Colors.grey}
-                                fontFamily={EFontFamily.SemiBold}
-                                fontSize={14}
-                                style={styles.subtitle}
-                            />
-                        </View>
-
-                        <View
-                            style={{
-                                gap: 16,
-                                alignItems: 'center',
-                            }}>
-                            <ButtonText
-                                text="Fazer login"
-                                onPress={() => navigate('/authStack/signin')}
-                            />
+                                    color={Colors.grey}
+                                    fontFamily={EFontFamily.SemiBold}
+                                    fontSize={14}
+                                    style={styles.subtitle}
+                                />
+                            </View>
 
                             <View
                                 style={{
-                                    flexDirection: 'row',
+                                    gap: 16,
+                                    alignItems: 'center',
                                 }}>
-                                <Text
-                                    text={`Ainda não possui uma conta?${' '}`}
-                                    color={Colors.grey}
-                                    fontSize={12}
-                                />
-                                <TouchableText
-                                    text="Cadastre-se"
+                                <ButtonText
+                                    text="Fazer login"
                                     onPress={() =>
-                                        navigate('/authStack/register')
+                                        navigate('/authStack/signin')
                                     }
-                                    fontSize={12}
                                 />
+
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                    }}>
+                                    <Text
+                                        text={`Ainda não possui uma conta?${' '}`}
+                                        color={Colors.grey}
+                                        fontSize={12}
+                                    />
+                                    <TouchableText
+                                        text="Cadastre-se"
+                                        onPress={() =>
+                                            navigate('/authStack/register')
+                                        }
+                                        fontSize={12}
+                                    />
+                                </View>
                             </View>
                         </View>
-                    </View>
-                </Card>
+                    </Card>
+                </View>
             </View>
-        </View>
+        )
     );
 }
 

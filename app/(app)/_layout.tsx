@@ -6,7 +6,6 @@ import { View } from 'react-native';
 export default function AppLayout() {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const { user, token } = useGlobalStore();
-    console.log(user, token);
 
     useEffect(() => {
         setIsUserLoggedIn(Boolean(user) && Boolean(token));
