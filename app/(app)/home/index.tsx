@@ -3,6 +3,7 @@ import { Button, Text, View } from 'react-native';
 import { useShowSnackbar } from '../../../hooks';
 import { useGlobalStore } from '../../../store/useSharedGlobalState';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
     const { navigate } = useRouter();
@@ -11,7 +12,13 @@ export default function HomeScreen() {
 
     return (
         <View
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'transparent',
+            }}
+        >
             <Text style={{ color: 'white' }}>Hello World!</Text>
             <Button
                 title="Teste"

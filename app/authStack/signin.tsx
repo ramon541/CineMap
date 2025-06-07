@@ -1,4 +1,3 @@
-import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import LoginUserForm from '../../components/Forms/LoginUserForm';
@@ -9,7 +8,7 @@ function SignIn() {
     return (
         <>
             <TitleDescription
-                title={`Olá. ${getGreeting()}`}
+                title={`Olá, ${getGreeting()}`}
                 description="Bem-vindo(a) de volta! Por favor, insira seus dados."
             />
             <View style={styles.formContainer}>
@@ -26,4 +25,5 @@ const styles = StyleSheet.create({
     },
 });
 
+// = ============================================================
 export default SignIn;

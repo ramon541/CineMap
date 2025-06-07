@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { InputBase, TitleDescription, TextInput } from '../../components';
-import { Colors } from '../../styles';
+import { TitleDescription } from '../../components';
 import RegisterUserForm from '../../components/Forms/RegisterUserForm';
 
 function Register() {

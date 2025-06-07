@@ -38,9 +38,9 @@ const registerSchema = z.object({
 
                 if (
                     isNaN(parsedDate.getTime()) ||
-                    parsedDate.getDate() !== Number(day) ||
-                    parsedDate.getMonth() + 1 !== Number(month) ||
-                    parsedDate.getFullYear() !== Number(year)
+                    parsedDate.getUTCDate() !== Number(day) ||
+                    parsedDate.getUTCMonth() + 1 !== Number(month) ||
+                    parsedDate.getUTCFullYear() !== Number(year)
                 ) {
                     return false;
                 }

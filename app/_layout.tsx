@@ -50,7 +50,7 @@ export default function RootLayout() {
     useEffect(() => {
         if (appIsReady) {
             const isUserLoggedIn = Boolean(user) && Boolean(token);
-            if (isUserLoggedIn) replace('/(tabs)/');
+            if (isUserLoggedIn) replace('(app)/home');
         }
     }, [appIsReady, user, token, replace]);
 
@@ -66,7 +66,8 @@ export default function RootLayout() {
                 style={[
                     styles.container,
                     { backgroundColor: Colors.background },
-                ]}>
+                ]}
+            >
                 <StatusBar style="light" />
                 <Slot />
             </View>
@@ -75,11 +76,9 @@ export default function RootLayout() {
     );
 }
 
+// = ============================================================
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
     },
 });

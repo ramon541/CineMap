@@ -44,7 +44,7 @@ function LoginUserForm() {
             setToken(accessToken);
             setAlreadyLoggedIn(true);
 
-            navigate('(tabs)/');
+            navigate('(app)/home');
             reset();
         } catch (error) {
             showSnackbar({
@@ -72,6 +72,7 @@ function LoginUserForm() {
                             value={value}
                             keyboardType="email-address"
                             maxLength={40}
+                            autoCapitalize="none"
                         />
                     </InputError>
                 )}

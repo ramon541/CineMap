@@ -73,7 +73,8 @@ function RegisterUserForm() {
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError
                         label="Apelido"
-                        error={errors.nickname?.message}>
+                        error={errors.nickname?.message}
+                    >
                         <TextInput
                             placeholder="cinema123"
                             onBlur={onBlur}
@@ -97,6 +98,7 @@ function RegisterUserForm() {
                             value={value}
                             keyboardType="email-address"
                             maxLength={40}
+                            autoCapitalize="none"
                         />
                     </InputError>
                 )}
@@ -108,7 +110,8 @@ function RegisterUserForm() {
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError
                         label="Data de Nascimento"
-                        error={errors.birthDate?.message}>
+                        error={errors.birthDate?.message}
+                    >
                         <TextInput
                             placeholder="00/00/0000"
                             onBlur={onBlur}
