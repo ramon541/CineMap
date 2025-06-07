@@ -7,6 +7,9 @@ interface IApiRequest {
     config?: AxiosRequestConfig;
 }
 
+//= =================================================================================
+
+// ------------ API TMDB ------------
 interface IGetMoviesResponse<T> {
     page: number;
     results: Array<T>;
@@ -31,8 +34,22 @@ interface MovieTMDB {
     vote_count: number;
 }
 
-//= =================================================================================
-
 interface IGetTopRatedMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
 
 interface IGetPopularMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
+
+//= =================================================================================
+
+// ------------ Own API ------------
+interface ApiResponse<T> {
+    sucess: boolean;
+    message: string;
+    data: T;
+}
+
+interface ILoginUserRequest extends Pick<IUser, 'email' | 'password'> {}
+interface ILoginUserResponse
+    extends ApiResponse<{
+        user: Omit<IUser, 'password' | 'createdAt' | 'updatedAt'>;
+        accessToken: IToken;
+    }> {}

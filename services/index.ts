@@ -2,7 +2,7 @@ import { request } from './request';
 
 import api from './api';
 import apiTMDB from './apiTMDB';
-import { IUserZod } from '../components/Forms/RegisterUserForm/userSchema';
+import { IRegisterZod } from '../components/Forms/RegisterUserForm/registerSchema';
 
 //= =================================================================================
 export const getTopRatedMovies = async () =>
@@ -21,10 +21,19 @@ export const getPopularMovies = async () =>
     });
 
 //= =================================================================================
-export const registerUser = async (data: IUserZod) =>
+export const registerUser = async (data: IRegisterZod) =>
     await request({
         api,
         method: 'post',
-        endpoint: '/api/user',
+        endpoint: '/api/auth/register',
+        data,
+    });
+
+//= =================================================================================
+export const loginUser = async (data: ILoginUserRequest) =>
+    await request<ILoginUserResponse>({
+        api,
+        method: 'post',
+        endpoint: '/api/auth/login',
         data,
     });

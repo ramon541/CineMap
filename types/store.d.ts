@@ -1,6 +1,11 @@
 interface IAppState {
-    user: IUser | null;
-    setUser: (user: IUser | null) => void;
+    user: Omit<IUser, 'password' | 'createdAt' | 'updatedAt'> | null;
+    setUser: (
+        user: Omit<IUser, 'password' | 'createdAt' | 'updatedAt'> | null
+    ) => void;
+
+    token: IToken | null;
+    setToken: (token: IToken | null) => void;
 
     snackbarInfo: ISnackbarProps;
     setSnackbarInfo: (snackbarInfo: ISnackbarProps) => void;

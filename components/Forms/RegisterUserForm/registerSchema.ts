@@ -10,7 +10,7 @@ const maxDate = new Date(
 
 export const UserType = z.enum(['A', 'C']);
 
-const userSchema = z.object({
+const registerSchema = z.object({
     name: z
         .string({ required_error: 'O nome é obrigatório' })
         .min(3, 'O nome deve ter pelo menos 3 caracteres'),
@@ -54,6 +54,6 @@ const userSchema = z.object({
         .transform((val) => toISODate(val)),
 });
 
-export interface IUserZod extends z.infer<typeof userSchema> {}
+export interface IRegisterZod extends z.infer<typeof registerSchema> {}
 
-export default userSchema;
+export default registerSchema;

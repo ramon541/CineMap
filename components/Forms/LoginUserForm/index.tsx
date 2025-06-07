@@ -4,42 +4,50 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
 
 import { useShowSnackbar } from '../../../hooks';
-import registerSchema, { IRegisterZod } from './registerSchema';
+import loginSchema, { ILoginZod } from './loginSchema';
 import TextInput from '../../TextInput';
 import ButtonText from '../../ButtonText';
 import InputError from '../../InputError';
-import { dateMask } from '../../../utils';
 import InputPassword from '../../InputPassword';
-import { registerUser } from '../../../services';
 import { Colors } from '../../../styles';
 
-function RegisterUserForm() {
+import { loginUser } from '../../../services';
+import { useGlobalStore } from '../../../store/useSharedGlobalState';
+import TouchableText from '../../TouchableText';
+
+function LoginUserForm() {
     const {
         control,
         handleSubmit,
         reset,
         formState: { errors, isLoading },
-    } = useForm<IRegisterZod>({
-        resolver: zodResolver(registerSchema),
+    } = useForm<ILoginZod>({
+        resolver: zodResolver(loginSchema),
     });
     const showSnackbar = useShowSnackbar();
     const { navigate } = useRouter();
+    const { setUser, setToken } = useGlobalStore();
 
     //= =================================================================================
-    async function onSubmit(data: IRegisterZod) {
+    async function onSubmit(data: ILoginZod) {
         try {
-            await registerUser(data);
+            const {
+                data: { user, accessToken },
+            } = await loginUser(data);
 
             showSnackbar({
-                text: 'Cadastro criado com sucesso!',
+                text: 'Login realizado com sucesso!',
                 backgroundColor: Colors.green,
                 textColor: Colors.white,
             });
-            navigate('/authStack/signin');
+            setUser(user);
+            setToken(accessToken);
+
+            navigate('/home');
             reset();
         } catch (error) {
             showSnackbar({
-                text: `Erro ao criar cadastro. ${
+                text: `Erro ao realizar login. ${
                     (error as Error)?.message || 'Tente novamente mais tarde.'
                 }`,
                 backgroundColor: Colors.red,
@@ -53,40 +61,6 @@ function RegisterUserForm() {
         <View style={styles.container}>
             <Controller
                 control={control}
-                name="name"
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <InputError label="Nome" error={errors.name?.message}>
-                        <TextInput
-                            placeholder="Exemplo da Silva"
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                            maxLength={40}
-                        />
-                    </InputError>
-                )}
-            />
-
-            <Controller
-                control={control}
-                name="nickname"
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <InputError
-                        label="Apelido"
-                        error={errors.nickname?.message}>
-                        <TextInput
-                            placeholder="cinema123"
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                            maxLength={20}
-                        />
-                    </InputError>
-                )}
-            />
-
-            <Controller
-                control={control}
                 name="email"
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError label="E-mail" error={errors.email?.message}>
@@ -97,26 +71,6 @@ function RegisterUserForm() {
                             value={value}
                             keyboardType="email-address"
                             maxLength={40}
-                        />
-                    </InputError>
-                )}
-            />
-
-            <Controller
-                control={control}
-                name="birthDate"
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <InputError
-                        label="Data de Nascimento"
-                        error={errors.birthDate?.message}>
-                        <TextInput
-                            placeholder="00/00/0000"
-                            onBlur={onBlur}
-                            onChangeText={(text) => onChange(dateMask(text))}
-                            value={value ? value.toString() : ''}
-                            textContentType="birthdateDay"
-                            keyboardType="numeric"
-                            maxLength={10}
                         />
                     </InputError>
                 )}
@@ -139,10 +93,17 @@ function RegisterUserForm() {
             />
 
             <ButtonText
-                text={!isLoading ? 'Cadastrar' : 'Criando conta...'}
+                text={!isLoading ? 'Login' : 'Logando...'}
                 onPress={handleSubmit(onSubmit)}
                 disabled={isLoading}
             />
+            <View style={styles.center}>
+                <TouchableText
+                    text="Esqueceu a senha?"
+                    fontSize={12}
+                    onPress={() => navigate('/authStack/forgot')}
+                />
+            </View>
         </View>
     );
 }
@@ -152,7 +113,10 @@ const styles = StyleSheet.create({
     container: {
         gap: 16,
     },
+    center: {
+        alignItems: 'center',
+    },
 });
 
 //= =================================================================================
-export default RegisterUserForm;
+export default LoginUserForm;

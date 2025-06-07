@@ -8,6 +8,9 @@ export const useGlobalStore = create<IAppState>()(
             user: null,
             setUser: (user) => set({ user }),
 
+            token: null,
+            setToken: (token) => set({ token }),
+
             snackbarInfo: {
                 visible: false,
                 text: '',

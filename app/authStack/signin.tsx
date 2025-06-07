@@ -1,28 +1,31 @@
 import { useRouter } from 'expo-router';
-import { Button, Text, View } from 'react-native';
-import { useGlobalStore } from '../../store/useSharedGlobalState';
+import { StyleSheet, View } from 'react-native';
+
+import LoginUserForm from '../../components/Forms/LoginUserForm';
+import { TitleDescription, TouchableText } from '../../components';
+import { getGreeting } from '../../utils';
 
 function SignIn() {
     const { navigate } = useRouter();
-    const { setUser } = useGlobalStore();
+
     return (
         <>
-            <Text>Signin page!</Text>
-            <Button
-                title="Esqueci minha senha"
-                onPress={() => {
-                    navigate('authStack/forgot');
-                }}
+            <TitleDescription
+                title={`Olá. ${getGreeting()}`}
+                description="Bem-vindo(a) de volta! Por favor, insira seus dados."
             />
-            <Button
-                title="Logar"
-                onPress={() => {
-                    setUser({ isLoggedIn: true });
-                    navigate('/home');
-                }}
-            />
+            <View style={styles.formContainer}>
+                <LoginUserForm />
+            </View>
         </>
     );
 }
+
+//= =================================================================================
+const styles = StyleSheet.create({
+    formContainer: {
+        marginTop: 72,
+    },
+});
 
 export default SignIn;

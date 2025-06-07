@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { useGlobalStore } from '../store/useSharedGlobalState';
 
 // = ============================================================
 const api = axios.create({
@@ -8,6 +9,12 @@ const api = axios.create({
 // = ============================================================
 api.interceptors.request.use(async (request) => {
     console.log('REQUEST: ', request);
+
+    if (!request.url?.includes('auth')) {
+        const token = useGlobalStore.getState().token;
+
+        request.headers.Authorization = `Bearer ${token}`;
+    }
 
     return request;
 });

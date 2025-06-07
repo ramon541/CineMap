@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 export default function AppLayout() {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-    const { user } = useGlobalStore();
+    const { user, token } = useGlobalStore();
 
     useEffect(() => {
-        setIsUserLoggedIn(Boolean(user?.isLoggedIn));
-    }, [user?.isLoggedIn]);
+        setIsUserLoggedIn(Boolean(user) || Boolean(token));
+    }, [user, token]);
 
     return !isUserLoggedIn ? <Redirect href="/signin" /> : <Slot />;
 }
