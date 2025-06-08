@@ -18,35 +18,14 @@ function SliderPagination({
     return (
         <View style={styles.container}>
             {itemList.map((_, index) => {
-                const pgAnimationStyle = useAnimatedStyle(() => {
-                    const dotWidth = interpolate(
-                        scrollX.value,
-                        [
-                            (index - 1) * screenWidth,
-                            index * screenWidth,
-                            (index + 1) * screenWidth,
-                        ],
-                        [8, 20, 8],
-                        Extrapolation.CLAMP
-                    );
-
-                    return {
-                        width: dotWidth,
-                    };
-                });
-
                 return (
                     <Animated.View
                         key={`dot-${index}-${new Date().getTime()}`}
                         style={[
-                            pgAnimationStyle,
-                            styles.dot,
-                            {
-                                backgroundColor:
-                                    paginationIndex === index
-                                        ? Colors.primary
-                                        : Colors.darkGrey,
-                            },
+                            paginationIndex === index
+                                ? styles.dotSelected
+                                : styles.dot,
+                            styles.dotContainer,
                         ]}
                     />
                 );
@@ -62,12 +41,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 60,
     },
-    dot: {
-        backgroundColor: Colors.primary,
-        width: 10,
-        height: 10,
+    dotContainer: {
         marginHorizontal: 8,
-        borderRadius: 8,
+        borderRadius: 999,
+    },
+    dotSelected: {
+        backgroundColor: Colors.primary,
+        width: 12,
+        height: 12,
+    },
+    dot: {
+        backgroundColor: Colors.primaryOpacity,
+        width: 8,
+        height: 8,
     },
 });
 

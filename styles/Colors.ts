@@ -2,6 +2,7 @@ const Colors = {
     transparent: 'rgba(255,255,255,0)',
     blackTransparent: 'rgba(0,0,0,0.8)',
     primary: '#0EA6E9',
+    primaryOpacity: '#0EA6E935',
     background: '#1F1D2B',
     shape: '#252836',
     green: '#22B07D',
