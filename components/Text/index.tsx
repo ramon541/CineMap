@@ -10,7 +10,14 @@ function Text({
     ...rest
 }: ITextProps<TextStyle, EFontFamily>) {
     return (
-        <TextRN style={{ color, fontFamily, fontSize, ...(rest.style || {}) }}>
+        <TextRN
+            style={{
+                color,
+                fontFamily,
+                fontSize,
+                ...(rest.style || {}),
+            }}
+        >
             {text}
         </TextRN>
     );

@@ -5,6 +5,39 @@ import { useRouter } from 'expo-router';
 import { useGlobalStore } from '../../../store/useSharedGlobalState';
 import { Slider, WelcomeCard } from '../../../components';
 
+const mockData = [
+    {
+        id: 1,
+        backdrop_path: '/l33oR0mnvf20avWyIMxW02EtQxn.jpg',
+        title: 'Interestelar',
+        release_date: '2017-06-07',
+    },
+    {
+        id: 12,
+        backdrop_path: '/8C32MMrMYT5gON7nXgEGeM4puH4.jpg',
+        title: 'The Science of Interstellar',
+        release_date: '2017-06-07',
+    },
+    {
+        id: 123,
+        backdrop_path: '/fTcs5ejlN1MwwLSSv9aU1mi5alL.jpg',
+        title: "Interstellar: Nolan's Odyssey",
+        release_date: '2017-06-07',
+    },
+    {
+        id: 1234,
+        backdrop_path: '/p1XtUnWJrmVNqyhYJGIatMNt8C1.jpg',
+        title: 'Interstella 5555',
+        release_date: '2017-06-07',
+    },
+    {
+        id: 12345,
+        backdrop_path: '/lQS9il7YqGjmmBefZY27uG5wbzT.jpg',
+        title: 'Faster Than Light: the Dream of Interstellar Flight',
+        release_date: '2017-06-07',
+    },
+];
+
 export default function HomeScreen() {
     const { user } = useGlobalStore();
 
@@ -18,7 +51,7 @@ export default function HomeScreen() {
                     />
                 </View>
             </ScrollView>
-            <Slider />
+            <Slider itemList={mockData} />
         </SafeAreaView>
     );
 }

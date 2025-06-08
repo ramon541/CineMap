@@ -32,10 +32,33 @@ export const dateMask = (text: string) => {
     )}`;
 };
 
-//= =================================================================================
+// = ============================================================
 export const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) return 'bom dia!';
     if (hour >= 12 && hour < 18) return 'boa tarde!';
     return 'boa noite!';
+};
+
+// = ============================================================
+export const formatDateToReadableString = (data: string): string => {
+    const meses = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro',
+    ];
+
+    const [ano, mes, dia] = data.split('-');
+    const nomeMes = meses[parseInt(mes) - 1];
+
+    return `${dia} de ${nomeMes} de ${ano}`;
 };
