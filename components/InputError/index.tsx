@@ -9,11 +9,14 @@ import { Colors } from '../../styles';
 function InputError({
     error,
     label,
+    primary = true,
     children,
 }: PropsWithChildren<IInputErrorProps>) {
     return (
         <View>
-            <InputBase label={label}>{children}</InputBase>
+            <InputBase primary={primary} label={label}>
+                {children}
+            </InputBase>
             <Text
                 text={error || ' '}
                 fontSize={12}

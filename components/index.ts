@@ -15,6 +15,8 @@ import InputError from './InputError';
 import Icon from './Icon';
 import InputIcon from './InputIcon';
 import InputPassword from './InputPassword';
+import WelcomeCard from './WelcomeCard';
+import InputSearch from './InputSearch';
 
 export {
     Toast,
@@ -34,4 +36,6 @@ export {
     Icon,
     InputIcon,
     InputPassword,
+    WelcomeCard,
+    InputSearch,
 };

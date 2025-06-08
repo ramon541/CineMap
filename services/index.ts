@@ -21,6 +21,14 @@ export const getPopularMovies = async () =>
     });
 
 //= =================================================================================
+export const searchMovies = async ({ query }: ISearchMoviesRequest) =>
+    await request<ISearchMoviesResponse>({
+        api: apiTMDB,
+        method: 'get',
+        endpoint: `/search/movie?query=${query}`,
+    });
+
+//= =================================================================================
 export const registerUser = async (data: IRegisterZod) =>
     await request({
         api,

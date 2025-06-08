@@ -5,16 +5,26 @@ import { Colors } from '../../styles';
 import { EFontFamily } from '../../enums';
 import Text from '../Text';
 
-function InputBase({ label, children }: PropsWithChildren<IInputBaseProps>) {
+function InputBase({
+    label,
+    primary = true,
+    children,
+}: PropsWithChildren<IInputBaseProps>) {
     return (
-        <View style={styles.container}>
-            <View style={styles.labelContainer}>
-                <Text
-                    text={label}
-                    fontFamily={EFontFamily.SemiBold}
-                    fontSize={12}
-                />
-            </View>
+        <View
+            style={
+                primary ? styles.containerPrimary : styles.containerSecondary
+            }
+        >
+            {primary && label && (
+                <View style={styles.labelContainerPrimary}>
+                    <Text
+                        text={label ?? ''}
+                        fontFamily={EFontFamily.SemiBold}
+                        fontSize={12}
+                    />
+                </View>
+            )}
             {children}
         </View>
     );
@@ -22,7 +32,7 @@ function InputBase({ label, children }: PropsWithChildren<IInputBaseProps>) {
 
 //= =================================================================================
 const styles = StyleSheet.create({
-    container: {
+    containerPrimary: {
         width: '100%',
         borderWidth: 1,
         borderColor: Colors.shape,
@@ -30,12 +40,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderRadius: 999,
     },
-    labelContainer: {
+    labelContainerPrimary: {
         position: 'absolute',
         top: -8,
         left: 10,
         backgroundColor: Colors.background,
         paddingHorizontal: 6,
+    },
+    containerSecondary: {
+        backgroundColor: Colors.shape,
+        width: '100%',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 999,
     },
 });
 

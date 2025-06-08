@@ -1,3 +1,4 @@
 interface IInputBaseProps {
-    label: string;
+    label?: string;
+    primary?: boolean;
 }

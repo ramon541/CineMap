@@ -38,6 +38,11 @@ interface IGetTopRatedMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
 
 interface IGetPopularMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
 
+interface ISearchMoviesRequest {
+    query: string;
+}
+interface ISearchMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
+
 //= =================================================================================
 
 // ------------ Own API ------------
