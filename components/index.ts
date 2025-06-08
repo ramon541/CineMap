@@ -19,6 +19,13 @@ import WelcomeCard from './WelcomeCard';
 import InputSearch from './InputSearch';
 import Slider from './Slider';
 import SliderItem from './SliderItem';
+import SliderPagination from './SliderPagination';
+import ProfilePhoto from './ProfilePhoto';
+import GenreCard from './GenreCard';
+import GenreList from './GenreList';
+import MovieCard from './MovieCard';
+import Rating from './Rating';
+import MovieCardList from './MovieCardList';
 
 export {
     Toast,
@@ -42,4 +49,11 @@ export {
     InputSearch,
     Slider,
     SliderItem,
+    SliderPagination,
+    ProfilePhoto,
+    GenreCard,
+    GenreList,
+    MovieCard,
+    Rating,
+    MovieCardList,
 };

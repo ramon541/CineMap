@@ -9,6 +9,11 @@ export const getBottomBar = () => {
     return initialWindowMetrics?.insets.bottom ?? 0;
 };
 
+//= =================================================================================
+export const getTopBar = () => {
+    return initialWindowMetrics?.insets.top ?? 0;
+};
+
 // = ============================================================
 export const toISODate = (brDate: string) => {
     const [day, month, year] = brDate.split('/');
@@ -62,3 +67,9 @@ export const formatDateToReadableString = (data: string): string => {
 
     return `${dia} de ${nomeMes} de ${ano}`;
 };
+
+//= =================================================================================
+export function truncateString(str: string, maxLength: number = 10): string {
+    if (str.length <= maxLength) return str;
+    return str.slice(0, maxLength) + '...';
+}

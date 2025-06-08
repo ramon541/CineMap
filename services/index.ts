@@ -61,3 +61,15 @@ export const getGenres = async () =>
         method: 'get',
         endpoint: '/genre/movie/list',
     });
+
+//= =================================================================================
+export const getPopularMoviesByGenre = async ({
+    genreId,
+}: IGetPopularMoviesByGenreRequest) =>
+    await request<IGetPopularMoviesByGenreResponse>({
+        api: apiTMDB,
+        method: 'get',
+        endpoint: `/discover/movie?sort_by=popularity.desc&page=1${
+            genreId !== 0 ? `&with_genres=${genreId}` : ''
+        }`,
+    });

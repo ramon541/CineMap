@@ -1,6 +1,5 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, FlatList } from 'react-native';
 import { memo } from 'react';
-import { LegendList } from '@legendapp/list';
 
 import GenreCard from '../GenreCard';
 
@@ -10,7 +9,7 @@ function GenreList({
     setSelectedGenre,
 }: GenreListProps) {
     return (
-        <LegendList
+        <FlatList
             data={genres}
             renderItem={({ item }) => (
                 <TouchableOpacity

@@ -9,6 +9,9 @@ interface IAppState {
 
     snackbarInfo: ISnackbarProps;
     setSnackbarInfo: (snackbarInfo: ISnackbarProps) => void;
+
+    globalGenres: Array<GenreTMDB>;
+    setGlobalGenres: (genres: Array<GenreTMDB>) => void;
 }
 
 interface IStorageService {

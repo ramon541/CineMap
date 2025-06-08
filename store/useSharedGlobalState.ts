@@ -19,6 +19,9 @@ export const useGlobalStore = create<IAppState>()(
             },
             setSnackbarInfo: (newSnarckbarInfo) =>
                 set({ snackbarInfo: newSnarckbarInfo }),
+
+            globalGenres: [],
+            setGlobalGenres: (globalGenres) => set({ globalGenres }),
         }),
         {
             name: 'app-name-global-storage',

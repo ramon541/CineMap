@@ -3,14 +3,27 @@ import { useGlobalStore } from '../../store/useSharedGlobalState';
 import { useEffect, useState } from 'react';
 import { Colors } from '../../styles';
 import { Icon } from '../../components';
+import { getGenres } from '../../services';
 
 export default function AppLayout() {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-    const { user, token } = useGlobalStore();
+    const { user, token, setGlobalGenres } = useGlobalStore();
 
     useEffect(() => {
         setIsUserLoggedIn(Boolean(user) && Boolean(token));
     }, [user, token]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const resGetGenres = await getGenres();
+
+                if (resGetGenres.genres) {
+                    setGlobalGenres(resGetGenres.genres);
+                }
+            } catch (error) {}
+        })();
+    }, []);
 
     if (!isUserLoggedIn) {
         return <Redirect href="/authStack/signin" />;
@@ -32,8 +45,7 @@ export default function AppLayout() {
                     paddingBottom: 0,
                 },
                 headerShown: false,
-            }}
-        >
+            }}>
             <Tabs.Screen
                 name="home"
                 options={{

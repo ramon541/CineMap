@@ -35,7 +35,7 @@ interface MovieTMDB {
 }
 
 interface GenreTMDB {
-    id: number | null;
+    id: number;
     name: string;
 }
 
@@ -53,6 +53,12 @@ interface ISearchMoviesRequest {
 interface ISearchMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
 
 interface IGetTrendingMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
+
+interface IGetPopularMoviesByGenreRequest {
+    genreId: number;
+}
+interface IGetPopularMoviesByGenreResponse
+    extends IGetMoviesResponse<MovieTMDB> {}
 
 //= =================================================================================
 
