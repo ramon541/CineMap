@@ -1,9 +1,9 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 import { useGlobalStore } from '../../../store/useSharedGlobalState';
-import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { WelcomeCard } from '../../../components';
+import { Slider, WelcomeCard } from '../../../components';
 
 export default function HomeScreen() {
     const { user } = useGlobalStore();
@@ -18,6 +18,7 @@ export default function HomeScreen() {
                     />
                 </View>
             </ScrollView>
+            <Slider />
         </SafeAreaView>
     );
 }

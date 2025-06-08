@@ -17,6 +17,8 @@ import InputIcon from './InputIcon';
 import InputPassword from './InputPassword';
 import WelcomeCard from './WelcomeCard';
 import InputSearch from './InputSearch';
+import Slider from './Slider';
+import SliderItem from './SliderItem';
 
 export {
     Toast,
@@ -38,4 +40,6 @@ export {
     InputPassword,
     WelcomeCard,
     InputSearch,
+    Slider,
+    SliderItem,
 };
