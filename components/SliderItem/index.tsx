@@ -1,16 +1,17 @@
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { memo } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-
-import Text from '../Text';
-import { Colors } from '../../styles';
-import { EFontFamily } from '../../enums';
-import { formatDateToReadableString } from '../../utils';
 import Animated, {
     Extrapolation,
     SharedValue,
     interpolate,
     useAnimatedStyle,
 } from 'react-native-reanimated';
+
+import Text from '../Text';
+import { Colors } from '../../styles';
+import { EFontFamily } from '../../enums';
+import { formatDateToReadableString } from '../../utils';
 
 const { width: screenWidth } = Dimensions.get('screen');
 
@@ -65,8 +66,7 @@ function SliderItem({
             />
             <LinearGradient
                 colors={[Colors.transparent, Colors.blackTransparent]}
-                style={styles.background}
-            >
+                style={styles.background}>
                 <View style={styles.textContainer}>
                     <Text
                         text={title}
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
 });
 
 // = ============================================================
-export default SliderItem;
+export default memo(SliderItem);

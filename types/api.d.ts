@@ -34,6 +34,15 @@ interface MovieTMDB {
     vote_count: number;
 }
 
+interface GenreTMDB {
+    id: number | null;
+    name: string;
+}
+
+interface IGenreResponse {
+    genres: Array<GenreTMDB>;
+}
+
 interface IGetTopRatedMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
 
 interface IGetPopularMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
@@ -42,6 +51,8 @@ interface ISearchMoviesRequest {
     query: string;
 }
 interface ISearchMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
+
+interface IGetTrendingMoviesResponse extends IGetMoviesResponse<MovieTMDB> {}
 
 //= =================================================================================
 

@@ -45,3 +45,19 @@ export const loginUser = async (data: ILoginUserRequest) =>
         endpoint: '/api/auth/login',
         data,
     });
+
+//= =================================================================================
+export const getTrendingMovies = async () =>
+    await request<IGetTrendingMoviesResponse>({
+        api: apiTMDB,
+        method: 'get',
+        endpoint: '/trending/movie/day',
+    });
+
+//= =================================================================================
+export const getGenres = async () =>
+    await request<IGenreResponse>({
+        api: apiTMDB,
+        method: 'get',
+        endpoint: '/genre/movie/list',
+    });

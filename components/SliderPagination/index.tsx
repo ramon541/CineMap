@@ -1,19 +1,12 @@
+import { Animated, StyleSheet, View } from 'react-native';
 import { memo } from 'react';
-import { Animated, Dimensions, StyleSheet, View } from 'react-native';
-import {
-    Extrapolation,
-    SharedValue,
-    interpolate,
-    useAnimatedStyle,
-} from 'react-native-reanimated';
-import { Colors } from '../../styles';
+import { SharedValue } from 'react-native-reanimated';
 
-const { width: screenWidth } = Dimensions.get('screen');
+import { Colors } from '../../styles';
 
 function SliderPagination({
     itemList,
     paginationIndex,
-    scrollX,
 }: SliderPaginationProps<SharedValue<number>>) {
     return (
         <View style={styles.container}>
@@ -58,4 +51,4 @@ const styles = StyleSheet.create({
 });
 
 // = ============================================================
-export default SliderPagination;
+export default memo(SliderPagination);

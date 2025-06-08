@@ -1,23 +1,20 @@
-import { memo, useEffect, useRef, useState } from 'react';
-import SliderItem from '../SliderItem';
+import { View, ViewToken } from 'react-native';
+import { memo, useRef, useState } from 'react';
 import Animated, {
-    scrollTo,
     useAnimatedRef,
     useAnimatedScrollHandler,
-    useDerivedValue,
     useSharedValue,
 } from 'react-native-reanimated';
-import { Dimensions, View, ViewToken } from 'react-native';
-import SliderPagination from '../SliderPagination';
 
-const { width: screenWidth } = Dimensions.get('screen');
+import SliderItem from '../SliderItem';
+import SliderPagination from '../SliderPagination';
 
 function Slider({ itemList }: SliderProps) {
     const scrollX = useSharedValue(0);
     const [paginationIndex, setPaginationIndex] = useState(0);
-    const [data, setData] = useState(itemList);
     const ref = useAnimatedRef<Animated.FlatList<any>>();
 
+    //= =================================================================================
     const onScrollHandler = useAnimatedScrollHandler({
         onScroll: (event) => {
             scrollX.value = event.contentOffset.x;
@@ -34,10 +31,10 @@ function Slider({ itemList }: SliderProps) {
         viewableItems: ViewToken[];
     }) => {
         if (
-            viewableItems[0].index !== undefined &&
-            viewableItems[0].index !== null
+            viewableItems[0]?.index !== undefined &&
+            viewableItems[0]?.index !== null
         ) {
-            setPaginationIndex(viewableItems[0].index);
+            setPaginationIndex(viewableItems[0]?.index);
         }
     };
 
@@ -45,11 +42,12 @@ function Slider({ itemList }: SliderProps) {
         { viewabilityConfig, onViewableItemsChanged },
     ]);
 
+    //= =================================================================================
     return (
         <View>
             <Animated.FlatList
                 ref={ref}
-                data={data}
+                data={itemList}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item, index }) => (
                     <SliderItem
@@ -81,4 +79,5 @@ function Slider({ itemList }: SliderProps) {
     );
 }
 
-export default Slider;
+//= =================================================================================
+export default memo(Slider);
