@@ -25,7 +25,7 @@ export const searchMovies = async ({ query }: ISearchMoviesRequest) =>
     await request<ISearchMoviesResponse>({
         api: apiTMDB,
         method: 'get',
-        endpoint: `/discover/movie?sort_by=popularity.desc&page=1&with_keywords=${query}`,
+        endpoint: `/search/movie?query=${query}&page=1`,
     });
 
 //= =================================================================================

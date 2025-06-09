@@ -8,7 +8,7 @@ import { searchMovies } from '../../../services';
 import InputSearch from '../../InputSearch';
 import searchSchema, { ISearchZod } from './searchSchema';
 
-function SearchForm() {
+function SearchForm({ onSearch }: SearchFormProps) {
     const {
         control,
         handleSubmit,
@@ -23,6 +23,9 @@ function SearchForm() {
         try {
             const response = await searchMovies({ query: data.movie });
 
+            if (response.results.length > 0) {
+                onSearch(response.results);
+            }
             console.log('@@', response);
         } catch (error) {
             console.log('@@ deu errado', error);
@@ -38,13 +41,16 @@ function SearchForm() {
                 render={({ field: { onChange, onBlur, value } }) => (
                     <InputError primary={false} error={errors.movie?.message}>
                         <InputSearch
-                            onPressIcon={() => handleSubmit(onSubmit)()}
+                            onPressIcon={() =>
+                                !isLoading && handleSubmit(onSubmit)()
+                            }
                             inputProps={{
                                 placeholder: 'Procure um filme...',
                                 onBlur: onBlur,
                                 onChangeText: onChange,
                                 value: value ? value.toString() : '',
-                                onSubmitEditing: () => handleSubmit(onSubmit)(),
+                                onSubmitEditing: () =>
+                                    !isLoading && handleSubmit(onSubmit)(),
                             }}
                         />
                     </InputError>

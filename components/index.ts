@@ -27,6 +27,8 @@ import MovieCard from './MovieCard';
 import Rating from './Rating';
 import MovieCardList from './MovieCardList';
 import IconText from './IconText';
+import MovieSearchCard from './MovieSearchCard';
+import MovieSearchCardList from './MovieSearchCardList';
 
 export {
     Toast,
@@ -58,4 +60,6 @@ export {
     Rating,
     MovieCardList,
     IconText,
+    MovieSearchCard,
+    MovieSearchCardList,
 };

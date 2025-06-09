@@ -1,24 +1,29 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, View } from 'react-native';
 
 import SearchForm from '../../../components/Forms/SearchForm';
+import { getTopBar } from '../../../utils';
+import { MovieSearchCardList } from '../../../components';
+import { useState } from 'react';
 
 export default function SearchScreen() {
+    const [movies, setMovies] = useState<Array<MovieTMDB>>([]);
+
+    //= =================================================================================
     return (
-        <SafeAreaView>
-            <ScrollView>
-                <View style={styles.container}>
-                    <SearchForm />
+        <MovieSearchCardList
+            movies={movies}
+            ListHeaderComponent={
+                <View style={styles.formContainer}>
+                    <SearchForm onSearch={(movies) => setMovies(movies)} />
                 </View>
-            </ScrollView>
-        </SafeAreaView>
+            }
+        />
     );
 }
 
 // = ============================================================
 const styles = StyleSheet.create({
-    container: {
-        margin: 24,
-        gap: 24,
+    formContainer: {
+        marginTop: getTopBar() + 24,
     },
 });
