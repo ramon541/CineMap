@@ -27,7 +27,7 @@ export default function MovieScreen() {
                 console.error('Error fetching movie data:', error);
             }
         })();
-    }, []);
+    }, [id]);
 
     //= =================================================================================
     function getYear(release_date: string | undefined): string {
