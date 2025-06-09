@@ -2,6 +2,9 @@ import { memo, ReactElement } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import MovieSearchCard from '../MovieSearchCard';
 import { useRouter } from 'expo-router';
+import Text from '../Text';
+import { Colors } from '../../styles';
+import { EFontFamily } from '../../enums';
 
 function MovieSearchCardList({
     movies,
@@ -39,6 +42,15 @@ function MovieSearchCardList({
             }}
             contentContainerStyle={{ paddingHorizontal: 24, gap: 12 }}
             ListHeaderComponent={ListHeaderComponent}
+            ListEmptyComponent={
+                <Text
+                    text="Nenhum filme encontrado."
+                    style={{ textAlign: 'center' }}
+                    fontFamily={EFontFamily.SemiBold}
+                    fontSize={14}
+                    color={Colors.grey}
+                />
+            }
         />
     );
 }

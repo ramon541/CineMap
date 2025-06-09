@@ -23,12 +23,10 @@ function SearchForm({ onSearch }: SearchFormProps) {
         try {
             const response = await searchMovies({ query: data.movie });
 
-            if (response.results.length > 0) {
-                onSearch(response.results);
-            }
-            console.log('@@', response);
+            onSearch(response.results);
         } catch (error) {
-            console.log('@@ deu errado', error);
+            console.error('Error searching movies:', error);
+            onSearch([]);
         }
     }
 
