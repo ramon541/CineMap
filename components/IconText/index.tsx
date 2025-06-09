@@ -2,40 +2,31 @@ import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Icon from '../Icon';
 import Text from '../Text';
+import { IconTextProps } from '../../types/components/iconText';
 import { Colors } from '../../styles';
 import { EFontFamily } from '../../enums';
 
-function Rating({ vote_average }: RatingProps) {
-    function format(rating: number) {
-        return (rating / 2).toFixed(1).replace(',', '.');
-    }
-
-    //= =================================================================================
+function IconText({ iconProps, textProps }: IconTextProps) {
     return (
         <View style={styles.container}>
-            <Icon name="star" size={16} color={Colors.orange} />
+            <Icon size={16} color={Colors.grey} {...iconProps} />
             <Text
-                text={format(vote_average)}
                 fontSize={12}
                 fontFamily={EFontFamily.SemiBold}
-                color={Colors.orange}
+                color={Colors.grey}
+                {...textProps}
             />
         </View>
     );
 }
-
 //= =================================================================================
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 8,
-        paddingVertical: 4,
         flexDirection: 'row',
-        gap: 4,
-        backgroundColor: 'rgba(0,0,0,0.4)',
-        borderRadius: 8,
-        width: 55,
+        alignItems: 'center',
+        gap: 6,
     },
 });
 
 //= =================================================================================
-export default memo(Rating);
+export default memo(IconText);

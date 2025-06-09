@@ -25,7 +25,7 @@ export const searchMovies = async ({ query }: ISearchMoviesRequest) =>
     await request<ISearchMoviesResponse>({
         api: apiTMDB,
         method: 'get',
-        endpoint: `/search/movie?query=${query}`,
+        endpoint: `/discover/movie?sort_by=popularity.desc&page=1&with_keywords=${query}`,
     });
 
 //= =================================================================================
@@ -72,4 +72,12 @@ export const getPopularMoviesByGenre = async ({
         endpoint: `/discover/movie?sort_by=popularity.desc&page=1${
             genreId !== 0 ? `&with_genres=${genreId}` : ''
         }`,
+    });
+
+//= =================================================================================
+export const getMovieById = async ({ id }: IGetMovieByIdRequest) =>
+    await request<IGetMovieByIdResponse>({
+        api: apiTMDB,
+        method: 'get',
+        endpoint: `/movie/${id}`,
     });

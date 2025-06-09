@@ -85,6 +85,13 @@ export default function AppLayout() {
                     ),
                 }}
             />
+            <Tabs.Screen
+                name="movie"
+                options={{
+                    href: null,
+                    tabBarStyle: { display: 'none' },
+                }}
+            />
         </Tabs>
     );
 }

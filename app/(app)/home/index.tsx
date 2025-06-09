@@ -1,5 +1,4 @@
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Button, ScrollView, StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { useGlobalStore } from '../../../store/useSharedGlobalState';
@@ -22,6 +21,8 @@ export default function HomeScreen() {
     const [genres, setGenres] = useState<Array<GenreTMDB>>([]);
     const [selectedGenre, setSelectedGenre] = useState<GenreTMDB>(defaultGenre);
     const [popularMovies, setPopularMovies] = useState<Array<MovieTMDB>>([]);
+
+    const { navigate } = useRouter();
 
     //= =================================================================================
     useEffect(() => {

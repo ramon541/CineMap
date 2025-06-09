@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../components';
+import { getTopBar } from '../../utils';
 
 function AuthStackLayout() {
     const { back, canGoBack } = useRouter();
@@ -20,21 +21,21 @@ function AuthStackLayout() {
         return '';
     }
     return (
-        <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
-                <ScrollView>
+        <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
+            <ScrollView>
+                <View style={{ marginTop: getTopBar() + 24 }}>
                     <Header
                         onPressBack={() => {
                             if (canGoBack()) back();
                         }}
                         title={useAuthTitle()}
                     />
-                    <View style={styles.contentWrapper}>
-                        <Slot />
-                    </View>
-                </ScrollView>
-            </KeyboardAvoidingView>
-        </SafeAreaView>
+                </View>
+                <View style={styles.contentWrapper}>
+                    <Slot />
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 

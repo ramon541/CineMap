@@ -11,6 +11,7 @@ function Header({ title, onPressBack }: IHeaderProps) {
                 <Text
                     text={title}
                     fontFamily={EFontFamily.Bold}
+                    fontSize={title.length > 20 ? 14 : 16}
                     style={styles.title}
                 />
             )}
@@ -30,12 +31,12 @@ const styles = StyleSheet.create({
         height: 35,
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 8,
     },
     iconBackWrapper: { left: 24, position: 'absolute' },
     title: {
         textAlign: 'center',
         width: '100%',
+        paddingHorizontal: 84,
     },
 });
 

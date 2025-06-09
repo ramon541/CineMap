@@ -1,5 +1,5 @@
-import { View, ViewToken } from 'react-native';
-import { memo, useRef, useState } from 'react';
+import { TouchableOpacity, View, ViewToken } from 'react-native';
+import { memo, use, useRef, useState } from 'react';
 import Animated, {
     useAnimatedRef,
     useAnimatedScrollHandler,
@@ -8,8 +8,10 @@ import Animated, {
 
 import SliderItem from '../SliderItem';
 import SliderPagination from '../SliderPagination';
+import { useRouter } from 'expo-router';
 
 function Slider({ itemList }: SliderProps) {
+    const { navigate } = useRouter();
     const scrollX = useSharedValue(0);
     const [paginationIndex, setPaginationIndex] = useState(0);
     const ref = useAnimatedRef<Animated.FlatList<any>>();
@@ -50,14 +52,27 @@ function Slider({ itemList }: SliderProps) {
                 data={itemList}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item, index }) => (
-                    <SliderItem
-                        id={item.id}
-                        backdrop_path={item.backdrop_path}
-                        title={item.title}
-                        release_date={item.release_date}
-                        index={index}
-                        scrollX={scrollX}
-                    />
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigate({
+                                pathname: '/movie/[id]',
+                                params: {
+                                    id: item.id,
+                                    title: item.title,
+                                    poster_path: item.poster_path,
+                                },
+                            });
+                        }}>
+                        <SliderItem
+                            id={item.id}
+                            backdrop_path={item.backdrop_path}
+                            title={item.title}
+                            release_date={item.release_date}
+                            poster_path={item.poster_path}
+                            index={index}
+                            scrollX={scrollX}
+                        />
+                    </TouchableOpacity>
                 )}
                 horizontal
                 showsHorizontalScrollIndicator={false}

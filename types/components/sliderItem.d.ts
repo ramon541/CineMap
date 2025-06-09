@@ -6,5 +6,5 @@ interface SliderItemProps<T> extends SliderItem {
 interface SliderItem
     extends Pick<
         MovieTMDB,
-        'id' | 'backdrop_path' | 'title' | 'release_date'
+        'id' | 'backdrop_path' | 'title' | 'release_date' | 'poster_path'
     > {}
