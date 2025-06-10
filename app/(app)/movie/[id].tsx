@@ -1,7 +1,15 @@
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 
-import { Header, Icon, IconText, Rating, Text } from '../../../components';
+import {
+    Button,
+    Header,
+    Icon,
+    IconText,
+    Rating,
+    Text,
+    FullScreenModal,
+} from '../../../components';
 import { getTopBar } from '../../../utils';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '../../../styles';
@@ -11,6 +19,8 @@ import { EFontFamily } from '../../../enums';
 
 export default function MovieScreen() {
     const [movie, setMovie] = useState<MovieDetailsTMDB | null>(null);
+
+    const [openModal, setOpenModal] = useState(false);
 
     const { navigate } = useRouter();
     const { id, title, poster_path } =
@@ -38,51 +48,85 @@ export default function MovieScreen() {
     }
     //= =================================================================================
     return (
-        <ScrollView>
-            <LinearGradient
-                style={styles.backgroundGradient}
-                colors={[Colors.transparent, Colors.background]}>
-                <Image
-                    style={styles.backgroundImage}
-                    src={`https://image.tmdb.org/t/p/original${poster_path}`}
-                />
-            </LinearGradient>
-            <View style={styles.container}>
-                <Header
-                    title={title || ''}
-                    onPressBack={() => navigate('/home')}
-                />
-            </View>
-            <View style={styles.posterWrapper}>
-                <Image
-                    style={styles.posterContainer}
-                    src={`https://image.tmdb.org/t/p/original${poster_path}`}
-                />
-            </View>
-            <View style={styles.infosWrapper}>
-                <IconText
-                    iconProps={{ name: 'calendar' }}
-                    textProps={{ text: getYear(movie?.release_date) }}
-                />
-                <Text text="|" color={Colors.grey} />
-                <IconText
-                    iconProps={{ name: 'time' }}
-                    textProps={{ text: `${movie?.runtime} minutos` }}
-                />
-                <Text text="|" color={Colors.grey} />
-                <IconText
-                    iconProps={{ name: 'film' }}
-                    textProps={{ text: movie?.genres[0].name || '' }}
-                />
-            </View>
-            <View style={styles.ratingWrapper}>
-                <Rating vote_average={movie?.vote_average ?? 0} />
-            </View>
-            <View style={styles.textWrapper}>
-                <Text text="Sinopse" fontFamily={EFontFamily.SemiBold} />
-                <Text text={movie?.overview || ''} fontSize={14} />
-            </View>
-        </ScrollView>
+        <>
+            <FullScreenModal
+                isVisible={openModal}
+                onRequestClose={() => setOpenModal(false)}>
+                <View style={styles.posterWrapper}>
+                    <Image
+                        style={styles.posterContainer}
+                        src={`https://image.tmdb.org/t/p/original${poster_path}`}
+                    />
+                </View>
+                <Button onPress={() => setOpenModal(false)}>
+                    <View style={styles.buttonInfoWrapper}>
+                        <Icon name="chatbubble-ellipses" size={14} />
+                        <Text
+                            text="Avaliar"
+                            fontSize={14}
+                            fontFamily={EFontFamily.SemiBold}
+                        />
+                    </View>
+                </Button>
+            </FullScreenModal>
+            <ScrollView>
+                <LinearGradient
+                    style={styles.backgroundGradient}
+                    colors={[Colors.transparent, Colors.background]}>
+                    <Image
+                        style={styles.backgroundImage}
+                        src={`https://image.tmdb.org/t/p/original${poster_path}`}
+                    />
+                </LinearGradient>
+                <View style={styles.container}>
+                    <Header
+                        title={title || ''}
+                        onPressBack={() => navigate('/home')}
+                    />
+                </View>
+                <View style={styles.posterWrapper}>
+                    <Image
+                        style={styles.posterContainer}
+                        src={`https://image.tmdb.org/t/p/original${poster_path}`}
+                    />
+                </View>
+                <View style={styles.infosWrapper}>
+                    <IconText
+                        iconProps={{ name: 'calendar' }}
+                        textProps={{ text: getYear(movie?.release_date) }}
+                    />
+                    <Text text="|" color={Colors.grey} />
+                    <IconText
+                        iconProps={{ name: 'time' }}
+                        textProps={{ text: `${movie?.runtime} minutos` }}
+                    />
+                    <Text text="|" color={Colors.grey} />
+                    <IconText
+                        iconProps={{ name: 'film' }}
+                        textProps={{ text: movie?.genres[0].name || '' }}
+                    />
+                </View>
+                <View style={styles.ratingWrapper}>
+                    <Rating vote_average={movie?.vote_average ?? 0} />
+                </View>
+                <View style={styles.reviewButtonWrapper}>
+                    <Button onPress={() => setOpenModal(true)}>
+                        <View style={styles.buttonInfoWrapper}>
+                            <Icon name="chatbubble-ellipses" size={14} />
+                            <Text
+                                text="Avaliar"
+                                fontSize={14}
+                                fontFamily={EFontFamily.SemiBold}
+                            />
+                        </View>
+                    </Button>
+                </View>
+                <View style={styles.textWrapper}>
+                    <Text text="Sinopse" fontFamily={EFontFamily.SemiBold} />
+                    <Text text={movie?.overview || ''} fontSize={14} />
+                </View>
+            </ScrollView>
+        </>
     );
 }
 
@@ -126,8 +170,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    reviewButtonWrapper: {
+        margin: 16,
+        alignSelf: 'center',
+        width: 205,
+    },
+    buttonInfoWrapper: {
+        flexDirection: 'row',
+        gap: 8,
+        alignItems: 'center',
+    },
     textWrapper: {
-        padding: 24,
+        margin: 24,
         gap: 12,
     },
 });
