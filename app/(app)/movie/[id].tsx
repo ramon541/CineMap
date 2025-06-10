@@ -16,11 +16,12 @@ import { Colors } from '../../../styles';
 import { useEffect, useState } from 'react';
 import { getMovieById } from '../../../services';
 import { EFontFamily } from '../../../enums';
+import ReviewForm from '../../../components/Forms/ReviewForm';
 
 export default function MovieScreen() {
     const [movie, setMovie] = useState<MovieDetailsTMDB | null>(null);
 
-    const [openModal, setOpenModal] = useState(false);
+    const [openModalReview, setOpenModalReview] = useState(false);
 
     const { navigate } = useRouter();
     const { id, title, poster_path } =
@@ -50,24 +51,19 @@ export default function MovieScreen() {
     return (
         <>
             <FullScreenModal
-                isVisible={openModal}
-                onRequestClose={() => setOpenModal(false)}>
-                <View style={styles.posterWrapper}>
-                    <Image
-                        style={styles.posterContainer}
-                        src={`https://image.tmdb.org/t/p/original${poster_path}`}
+                isVisible={true}
+                onRequestClose={() => setOpenModalReview(false)}>
+                <ScrollView
+                    style={{
+                        marginHorizontal: 24,
+                        marginTop: getTopBar() + 24,
+                    }}>
+                    <Header
+                        title="Review"
+                        onPressBack={() => setOpenModalReview(false)}
                     />
-                </View>
-                <Button onPress={() => setOpenModal(false)}>
-                    <View style={styles.buttonInfoWrapper}>
-                        <Icon name="chatbubble-ellipses" size={14} />
-                        <Text
-                            text="Avaliar"
-                            fontSize={14}
-                            fontFamily={EFontFamily.SemiBold}
-                        />
-                    </View>
-                </Button>
+                    <ReviewForm />
+                </ScrollView>
             </FullScreenModal>
             <ScrollView>
                 <LinearGradient
@@ -110,7 +106,7 @@ export default function MovieScreen() {
                     <Rating vote_average={movie?.vote_average ?? 0} />
                 </View>
                 <View style={styles.reviewButtonWrapper}>
-                    <Button onPress={() => setOpenModal(true)}>
+                    <Button onPress={() => setOpenModalReview(true)}>
                         <View style={styles.buttonInfoWrapper}>
                             <Icon name="chatbubble-ellipses" size={14} />
                             <Text
