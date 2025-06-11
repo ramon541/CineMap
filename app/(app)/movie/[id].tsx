@@ -11,7 +11,6 @@ import {
     Text,
     FullScreenModal,
     Review,
-    Hr,
 } from '../../../components';
 import { getTopBar } from '../../../utils';
 import { Colors } from '../../../styles';
@@ -194,6 +193,9 @@ export default function MovieScreen() {
                     <Text text="Sinopse" fontFamily={EFontFamily.SemiBold} />
                     <Text text={movie?.overview || ''} fontSize={14} />
                 </View>
+                <View style={styles.textWrapper}>
+                    <Text text="Avaliações" fontFamily={EFontFamily.SemiBold} />
+                </View>
                 <FlatList
                     data={reviews}
                     keyExtractor={(item) => item.id.toString()}
@@ -215,6 +217,15 @@ export default function MovieScreen() {
                             style={{ alignSelf: 'center', marginVertical: 8 }}
                         />
                     )}
+                    ListEmptyComponent={
+                        <Text
+                            text="Seja o(a) primeiro(a) a avaliar este filme!"
+                            style={{ textAlign: 'center' }}
+                            fontFamily={EFontFamily.SemiBold}
+                            fontSize={14}
+                            color={Colors.grey}
+                        />
+                    }
                 />
             </ScrollView>
         </>
