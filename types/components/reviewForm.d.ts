@@ -1,4 +1,4 @@
-interface ReviewFormProps {
+interface ReviewFormProps<T> {
     movieId: number;
-    onSubmitForm: VoidFunction;
+    onSubmitForm: (data: T) => void;
 }

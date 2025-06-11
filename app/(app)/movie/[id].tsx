@@ -1,5 +1,6 @@
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import {
     Button,
@@ -9,23 +10,31 @@ import {
     Rating,
     Text,
     FullScreenModal,
+    Review,
+    Hr,
 } from '../../../components';
 import { getTopBar } from '../../../utils';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '../../../styles';
 import { useEffect, useState } from 'react';
-import { getMovieById } from '../../../services';
+import {
+    getAllReviewsByMovieId,
+    getMovieById,
+    getUserReviewByMovieId,
+} from '../../../services';
 import { EFontFamily } from '../../../enums';
 import ReviewForm from '../../../components/Forms/ReviewForm';
+import { useGlobalStore } from '../../../store/useSharedGlobalState';
 
 export default function MovieScreen() {
-    const [movie, setMovie] = useState<MovieDetailsTMDB | null>(null);
-
-    const [openModalReview, setOpenModalReview] = useState(false);
-
     const { navigate } = useRouter();
     const { id, title, poster_path } =
         useLocalSearchParams<Partial<MovieScreenProps>>();
+    const { user } = useGlobalStore();
+
+    const [movie, setMovie] = useState<MovieDetailsTMDB | null>(null);
+    const [reviews, setReviews] = useState<Array<IUserReview>>([]);
+    const [userReview, setUserReview] = useState<IUserReview | null>(null);
+    const [openModalReview, setOpenModalReview] = useState(false);
 
     //= =================================================================================
     useEffect(() => {
@@ -36,6 +45,27 @@ export default function MovieScreen() {
                 if (resMovie) setMovie(resMovie);
             } catch (error) {
                 console.error('Error fetching movie data:', error);
+            }
+        })();
+    }, [id]);
+
+    //= =================================================================================
+    useEffect(() => {
+        (async () => {
+            try {
+                const resReviews = await getAllReviewsByMovieId({
+                    movieId: Number(id),
+                });
+                const resUserReview = await getUserReviewByMovieId({
+                    movieId: Number(id),
+                    userId: user?.id ?? 0,
+                });
+
+                if (resReviews?.data?.length > 0) setReviews(resReviews.data);
+
+                if (resUserReview?.data) setUserReview(resUserReview.data);
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
             }
         })();
     }, [id]);
@@ -71,7 +101,11 @@ export default function MovieScreen() {
 
                     <ReviewForm
                         movieId={Number(id ?? 0)}
-                        onSubmitForm={() => setOpenModalReview(false)}
+                        onSubmitForm={(newReview) => {
+                            setOpenModalReview(false);
+                            setUserReview(newReview);
+                            setReviews((prev) => [...prev, newReview]);
+                        }}
                     />
                 </ScrollView>
             </FullScreenModal>
@@ -116,21 +150,72 @@ export default function MovieScreen() {
                     <Rating vote_average={movie?.vote_average ?? 0} />
                 </View>
                 <View style={styles.reviewButtonWrapper}>
-                    <Button onPress={() => setOpenModalReview(true)}>
+                    <Button
+                        onPress={() => {
+                            if (!userReview) setOpenModalReview(true);
+                        }}
+                        disabled={!!userReview}>
                         <View style={styles.buttonInfoWrapper}>
-                            <Icon name="chatbubble-ellipses" size={14} />
+                            <Icon
+                                name={
+                                    userReview
+                                        ? 'checkmark-circle'
+                                        : 'chatbubble-ellipses'
+                                }
+                                size={14}
+                                color={userReview ? Colors.white : Colors.white}
+                            />
                             <Text
-                                text="Avaliar"
+                                text={userReview ? 'Já avaliado' : 'Avaliar'}
                                 fontSize={14}
                                 fontFamily={EFontFamily.SemiBold}
+                                color={userReview ? Colors.white : Colors.white}
                             />
                         </View>
                     </Button>
                 </View>
+                {userReview && (
+                    <View style={styles.userReview}>
+                        <Text
+                            text="Sua avaliação"
+                            fontFamily={EFontFamily.SemiBold}
+                        />
+                        <View style={styles.userReviewContainer}>
+                            <Review
+                                user={userReview.user}
+                                rating={userReview.rating}
+                                comment={userReview.comment || ''}
+                            />
+                        </View>
+                    </View>
+                )}
+
                 <View style={styles.textWrapper}>
                     <Text text="Sinopse" fontFamily={EFontFamily.SemiBold} />
                     <Text text={movie?.overview || ''} fontSize={14} />
                 </View>
+                <FlatList
+                    data={reviews}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <Review
+                            user={item.user}
+                            rating={item.rating}
+                            comment={item.comment || ''}
+                        />
+                    )}
+                    contentContainerStyle={{
+                        paddingBottom: 48,
+                        marginHorizontal: 24,
+                    }}
+                    ItemSeparatorComponent={() => (
+                        <Icon
+                            color={Colors.shape}
+                            name="ellipsis-horizontal"
+                            style={{ alignSelf: 'center', marginVertical: 8 }}
+                        />
+                    )}
+                />
             </ScrollView>
         </>
     );
@@ -189,5 +274,16 @@ const styles = StyleSheet.create({
     textWrapper: {
         margin: 24,
         gap: 12,
+    },
+    userReview: {
+        paddingHorizontal: 24,
+        paddingVertical: 16,
+        gap: 8,
+    },
+    userReviewContainer: {
+        borderWidth: 1,
+        borderColor: Colors.primaryOpacity,
+        borderRadius: 12,
+        padding: 8,
     },
 });

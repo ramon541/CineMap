@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { useGlobalStore } from '../../../store/useSharedGlobalState';
 import { newReview } from '../../../services';
 
-function ReviewForm({ movieId, onSubmitForm }: ReviewFormProps) {
+function ReviewForm({ movieId, onSubmitForm }: ReviewFormProps<IUserReview>) {
     const { user } = useGlobalStore();
     const {
         control,
@@ -42,8 +42,13 @@ function ReviewForm({ movieId, onSubmitForm }: ReviewFormProps) {
     //= =================================================================================
     async function onSubmit(data: IReviewZod) {
         try {
-            onSubmitForm();
-            await newReview(data);
+            const { data: idNewReview } = await newReview(data);
+            onSubmitForm({
+                ...data,
+                comment: data.comment ?? '',
+                id: idNewReview,
+                user: { id: user?.id ?? 0, name: user?.name ?? '' },
+            });
 
             showSnackbar({
                 text: 'Review feita com sucesso!',

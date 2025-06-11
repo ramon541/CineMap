@@ -130,3 +130,19 @@ interface ILoginUserResponse
         user: Omit<IUser, 'password' | 'createdAt' | 'updatedAt'>;
         accessToken: IToken;
     }> {}
+
+interface IGetUserReviewByMovieIdRequest {
+    movieId: number;
+    userId: number;
+}
+
+interface IGetUserReviewByMovieIdResponse extends ApiResponse<IUserReview> {}
+
+interface IGetAllReviewsByMovieIdRequest {
+    movieId: number;
+}
+
+interface IGetAllReviewsByMovieIdResponse
+    extends ApiResponse<Array<IUserReview>> {}
+
+interface INewReviewResponse extends ApiResponse<number> {}

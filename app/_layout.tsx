@@ -10,6 +10,11 @@ import {
     Montserrat_600SemiBold,
     Montserrat_700Bold,
     Montserrat_900Black,
+    Montserrat_200ExtraLight_Italic,
+    Montserrat_400Regular_Italic,
+    Montserrat_600SemiBold_Italic,
+    Montserrat_700Bold_Italic,
+    Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat';
 
 import { Colors } from '../styles';
@@ -32,6 +37,12 @@ export default function RootLayout() {
         Montserrat_600SemiBold,
         Montserrat_700Bold,
         Montserrat_900Black,
+
+        Montserrat_200ExtraLight_Italic,
+        Montserrat_400Regular_Italic,
+        Montserrat_600SemiBold_Italic,
+        Montserrat_700Bold_Italic,
+        Montserrat_900Black_Italic,
     });
     const { replace } = useRouter();
     const { user, token } = useGlobalStore();
@@ -66,8 +77,7 @@ export default function RootLayout() {
                 style={[
                     styles.container,
                     { backgroundColor: Colors.background },
-                ]}
-            >
+                ]}>
                 <StatusBar style="light" />
                 <Slot />
             </View>

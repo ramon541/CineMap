@@ -85,9 +85,32 @@ export const getMovieById = async ({ id }: IGetMovieByIdRequest) =>
 
 //= =================================================================================
 export const newReview = async (data: IReviewZod) =>
-    await request({
+    await request<INewReviewResponse>({
         api,
         method: 'post',
         endpoint: '/api/review',
         data,
     });
+
+//= =================================================================================
+export const getUserReviewByMovieId = async ({
+    movieId,
+    userId,
+}: IGetUserReviewByMovieIdRequest) =>
+    await request<IGetUserReviewByMovieIdResponse>({
+        api,
+        method: 'get',
+        endpoint: `/api/reviews/movie/${movieId}/user/${userId}`,
+    });
+
+//= =================================================================================
+export const getAllReviewsByMovieId = async ({
+    movieId,
+}: IGetAllReviewsByMovieIdRequest) =>
+    await request<IGetAllReviewsByMovieIdResponse>({
+        api,
+        method: 'get',
+        endpoint: `/api/reviews/movie/${movieId}`,
+    });
+
+//= =================================================================================

@@ -30,6 +30,8 @@ import IconText from './IconText';
 import MovieSearchCard from './MovieSearchCard';
 import MovieSearchCardList from './MovieSearchCardList';
 import FullScreenModal from './FullScreenModal';
+import Review from './Review';
+import Hr from './Hr';
 
 export {
     Toast,
@@ -64,4 +66,6 @@ export {
     MovieSearchCard,
     MovieSearchCardList,
     FullScreenModal,
+    Review,
+    Hr,
 };
