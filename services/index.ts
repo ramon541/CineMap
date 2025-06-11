@@ -3,6 +3,7 @@ import { request } from './request';
 import api from './api';
 import apiTMDB from './apiTMDB';
 import { IRegisterZod } from '../components/Forms/RegisterUserForm/registerSchema';
+import { IReviewZod } from '../components/Forms/ReviewForm/reviewSchema';
 
 //= =================================================================================
 export const getTopRatedMovies = async () =>
@@ -80,4 +81,13 @@ export const getMovieById = async ({ id }: IGetMovieByIdRequest) =>
         api: apiTMDB,
         method: 'get',
         endpoint: `/movie/${id}`,
+    });
+
+//= =================================================================================
+export const newReview = async (data: IReviewZod) =>
+    await request({
+        api,
+        method: 'post',
+        endpoint: '/api/review',
+        data,
     });

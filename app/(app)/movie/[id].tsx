@@ -51,7 +51,7 @@ export default function MovieScreen() {
     return (
         <>
             <FullScreenModal
-                isVisible={true}
+                isVisible={openModalReview}
                 onRequestClose={() => setOpenModalReview(false)}>
                 <ScrollView
                     style={{
@@ -62,7 +62,17 @@ export default function MovieScreen() {
                         title="Review"
                         onPressBack={() => setOpenModalReview(false)}
                     />
-                    <ReviewForm />
+                    <View style={styles.posterWrapper}>
+                        <Image
+                            style={styles.posterContainer}
+                            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+                        />
+                    </View>
+
+                    <ReviewForm
+                        movieId={Number(id ?? 0)}
+                        onSubmitForm={() => setOpenModalReview(false)}
+                    />
                 </ScrollView>
             </FullScreenModal>
             <ScrollView>

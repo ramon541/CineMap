@@ -9,66 +9,107 @@ import { Colors } from '../../../styles';
 import InputError from '../../InputError';
 import TextInput from '../../TextInput';
 import ButtonText from '../../ButtonText';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useGlobalStore } from '../../../store/useSharedGlobalState';
+import { newReview } from '../../../services';
 
-function ReviewForm() {
+function ReviewForm({ movieId, onSubmitForm }: ReviewFormProps) {
+    const { user } = useGlobalStore();
     const {
         control,
         handleSubmit,
         reset,
+        setValue,
+        getValues,
         formState: { errors, isLoading },
     } = useForm<IReviewZod>({
         resolver: zodResolver(reviewSchema),
+        defaultValues: {
+            movieId,
+            userId: user?.id,
+            comment: '',
+            rating: 0,
+        },
     });
     const showSnackbar = useShowSnackbar();
-
     const [rating, setRating] = useState(0);
+
+    //= =================================================================================
+    useEffect(() => {
+        setValue('rating', rating);
+    }, [rating]);
 
     //= =================================================================================
     async function onSubmit(data: IReviewZod) {
         try {
+            onSubmitForm();
+            await newReview(data);
+
+            showSnackbar({
+                text: 'Review feita com sucesso!',
+                backgroundColor: Colors.green,
+            });
+
             reset();
+            setRating(0);
         } catch (error) {
             showSnackbar({
                 text: `Erro ao fazer a Review. ${
                     (error as Error)?.message || 'Tente novamente mais tarde.'
                 }`,
                 backgroundColor: Colors.red,
-                textColor: Colors.white,
             });
         }
     }
 
+    //= =================================================================================
     return (
-        <>
-            {/* <Controller
+        <View style={styles.container}>
+            <Controller
                 control={control}
-                name="name"
+                name="comment"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <InputError label="Nome" error={errors.name?.message}>
+                    <InputError
+                        label="Comentário"
+                        error={errors.comment?.message}>
                         <TextInput
-                            placeholder="Exemplo da Silva"
+                            placeholder="Escreva sua opinião (opcional)"
                             onBlur={onBlur}
                             onChangeText={onChange}
-                            value={value}
-                            maxLength={40}
+                            value={value || ''}
+                            maxLength={300}
+                            multiline
                         />
                     </InputError>
                 )}
-            /> */}
+            />
 
-            <StarRating rating={rating} onChange={setRating} />
+            <View style={styles.starsContainer}>
+                <StarRating
+                    color={Colors.orange}
+                    rating={rating}
+                    onChange={setRating}
+                />
+            </View>
 
             <ButtonText
                 text={!isLoading ? 'Fazer review' : 'Enviando review...'}
                 onPress={handleSubmit(onSubmit)}
                 disabled={isLoading}
             />
-        </>
+        </View>
     );
 }
 //= =================================================================================
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        marginVertical: 24,
+        gap: 16,
+    },
+    starsContainer: {
+        alignItems: 'center',
+    },
+});
 
 //= =================================================================================
 export default ReviewForm;
